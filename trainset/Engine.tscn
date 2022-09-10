@@ -1,0 +1,448 @@
+[gd_scene load_steps=44 format=2]
+
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=1]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=4]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/FloatCondition.gd" type="Script" id=6]
+[ext_resource path="res://trainset/Engine.gd" type="Script" id=7]
+[ext_resource path="res://sounds/WAP4IDLESOUND.tres" type="AudioStream" id=8]
+[ext_resource path="res://sounds/x_ss9_pantot_down.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/x_ss9_pantot_up.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/Wap_Horn2.wav" type="AudioStream" id=11]
+[ext_resource path="res://HornPlayer.gd" type="Script" id=12]
+[ext_resource path="res://icon.png" type="Texture" id=13]
+[ext_resource path="res://sound_system/CoachSounds.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( -32, 120 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 548, 20 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 343, 40 )
+}
+name = "Starting"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 142, 120 )
+}
+name = "Stopped"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 359.5, 200 )
+}
+name = "Stopping"
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 636.5, 180 )
+}
+name = "Throttling"
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+from = "Entry"
+to = "Stopped"
+conditions = {
+}
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+name = "stop_button_pressed"
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+from = "Idle"
+to = "Stopping"
+conditions = {
+"stop_button_pressed": SubResource( 8 )
+}
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 6 )
+name = "throttle"
+comparation = 2
+value = 2.0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+from = "Idle"
+to = "Throttling"
+conditions = {
+"throttle": SubResource( 10 )
+}
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+name = "started"
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+from = "Starting"
+to = "Idle"
+conditions = {
+"started": SubResource( 12 )
+}
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+name = "start_button_pressed"
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+from = "Stopped"
+to = "Starting"
+conditions = {
+"start_button_pressed": SubResource( 14 )
+}
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+name = "stopped"
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+from = "Stopping"
+to = "Stopped"
+conditions = {
+"stopped": SubResource( 16 )
+}
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 6 )
+name = "throttle"
+comparation = 3
+value = 2.0
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+from = "Throttling"
+to = "Idle"
+conditions = {
+"throttle": SubResource( 18 )
+}
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+name = "stop_button_pressed"
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+from = "Throttling"
+to = "Stopping"
+conditions = {
+"stop_button_pressed": SubResource( 21 )
+}
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 1 )
+name = ""
+states = {
+"Entry": SubResource( 1 ),
+"Idle": SubResource( 2 ),
+"Starting": SubResource( 3 ),
+"Stopped": SubResource( 4 ),
+"Stopping": SubResource( 5 ),
+"Throttling": SubResource( 6 )
+}
+transitions = {
+"Entry": {
+"Stopped": SubResource( 7 )
+},
+"Idle": {
+"Stopping": SubResource( 9 ),
+"Throttling": SubResource( 11 )
+},
+"Starting": {
+"Idle": SubResource( 13 )
+},
+"Stopped": {
+"Starting": SubResource( 15 )
+},
+"Stopping": {
+"Stopped": SubResource( 17 )
+},
+"Throttling": {
+"Idle": SubResource( 19 ),
+"Stopping": SubResource( 22 )
+}
+}
+
+[sub_resource type="SpatialMaterial" id=33]
+albedo_color = Color( 1, 0.631373, 0, 1 )
+albedo_texture = ExtResource( 13 )
+uv1_scale = Vector3( 5, 5, 5 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=32]
+albedo_color = Color( 0.960784, 0.0156863, 0.0156863, 1 )
+albedo_texture = ExtResource( 13 )
+uv1_scale = Vector3( 5, 5, 5 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=23]
+extents = Vector3( 1, 1, 3 )
+
+[sub_resource type="Animation" id=80]
+resource_name = "PantoDownAnim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pantograph:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5, 3.7, 4, 4.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3, 2.5 ), Vector3( 0, 2.15, 2.5 ), Vector3( 0, 2.2, 2.5 ), Vector3( 0, 2.1, 2.5 ) ]
+}
+
+[sub_resource type="Animation" id=81]
+resource_name = "PantoUpAnim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pantograph:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.8, 1.2, 3.8, 4.2, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.1, 2.5 ), Vector3( 0, 2.2, 2.5 ), Vector3( 0, 2.15, 2.5 ), Vector3( 0, 3.05, 2.5 ), Vector3( 0, 2.95, 2.5 ), Vector3( 0, 3, 2.5 ) ]
+}
+
+[sub_resource type="Animation" id=82]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pantograph:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.104, 2.5 ) ]
+}
+
+[sub_resource type="CylinderMesh" id=83]
+top_radius = 0.05
+bottom_radius = 0.05
+
+[node name="Engine" type="VehicleBody" groups=["engine"]]
+collision_layer = 18
+collision_mask = 29
+script = ExtResource( 7 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 4 )
+state_machine = SubResource( 20 )
+
+[node name="IdleSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35081, 0 )
+stream = ExtResource( 8 )
+unit_db = -2.0
+max_distance = 90.0
+area_mask = 5
+doppler_tracking = 1
+
+[node name="PantoUpPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 2.5 )
+stream = ExtResource( 10 )
+unit_db = -2.499
+max_distance = 50.0
+area_mask = 5
+doppler_tracking = 1
+
+[node name="PantoDownPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 2.5 )
+stream = ExtResource( 9 )
+unit_db = -2.499
+max_distance = 50.0
+area_mask = 5
+doppler_tracking = 1
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_top = 200.0
+margin_right = 58.0
+margin_bottom = 214.0
+text = "Throttle: "
+
+[node name="HornPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, -3.05 )
+stream = ExtResource( 11 )
+attenuation_model = 2
+unit_size = 4.0
+area_mask = 5
+emission_angle_enabled = true
+doppler_tracking = 1
+script = ExtResource( 12 )
+loop_start = 0.8
+
+[node name="BellPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.09942, -2.7056 )
+stream = ExtResource( 11 )
+pitch_scale = 2.0
+max_distance = 150.0
+area_mask = 5
+doppler_tracking = 1
+script = ExtResource( 12 )
+loop_start = 0.8
+
+[node name="HornPlayer2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.85, 3.05 )
+stream = ExtResource( 11 )
+unit_size = 4.0
+area_mask = 5
+emission_angle_enabled = true
+emission_angle_filter_attenuation_db = 0.0
+doppler_tracking = 1
+script = ExtResource( 12 )
+loop_start = 0.8
+
+[node name="BellPlayer2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.099, 2.706 )
+stream = ExtResource( 11 )
+pitch_scale = 2.0
+max_distance = 150.0
+area_mask = 5
+doppler_tracking = 1
+script = ExtResource( 12 )
+loop_start = 0.8
+
+[node name="MeshInstance" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+depth = 6.0
+material = SubResource( 33 )
+
+[node name="VehicleWheel" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, 2 )
+use_as_traction = true
+suspension_travel = 0.25
+suspension_stiffness = 50.0
+suspension_max_force = 955.0
+
+[node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 8
+radius = 0.5
+height = 0.25
+sides = 64
+material = SubResource( 32 )
+
+[node name="VehicleWheel2" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, 2 )
+use_as_traction = true
+suspension_travel = 0.25
+suspension_stiffness = 50.0
+suspension_max_force = 955.0
+
+[node name="MeshInstance2" type="CSGCylinder" parent="VehicleWheel2"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 9
+radius = 0.5
+height = 0.25
+sides = 64
+material = SubResource( 32 )
+
+[node name="VehicleWheel3" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, -2 )
+use_as_traction = true
+use_as_steering = true
+suspension_travel = 0.25
+suspension_stiffness = 50.0
+suspension_max_force = 955.0
+
+[node name="MeshInstance3" type="CSGCylinder" parent="VehicleWheel3"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 9
+radius = 0.5
+height = 0.25
+sides = 64
+material = SubResource( 32 )
+
+[node name="VehicleWheel4" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, -2 )
+use_as_traction = true
+use_as_steering = true
+suspension_travel = 0.25
+suspension_stiffness = 50.0
+suspension_max_force = 955.0
+
+[node name="MeshInstance3" type="CSGCylinder" parent="VehicleWheel4"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 9
+radius = 0.5
+height = 0.25
+sides = 64
+material = SubResource( 32 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+shape = SubResource( 23 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 2.5, -3.15 )
+omni_range = 0.5
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 2.5, -3.15 )
+omni_range = 0.5
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0.1, 2.5, -3.15 )
+light_energy = 7.5
+spot_range = 10.0
+spot_angle = 50.0
+
+[node name="SpotLight2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -0.1, 2.5, -3.15 )
+light_energy = 7.5
+spot_range = 10.0
+spot_angle = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/PantoDownAnim = SubResource( 80 )
+anims/PantoUpAnim = SubResource( 81 )
+anims/RESET = SubResource( 82 )
+
+[node name="Pantograph" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.104, 2.5 )
+mesh = SubResource( 83 )
+
+[node name="Sounds" parent="." instance=ExtResource( 14 )]
+vehicle_body_np = NodePath("..")
+
+[connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]

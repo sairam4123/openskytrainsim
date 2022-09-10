@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://materials/SignalMaterial.tres" type="Material" id=2]
+[ext_resource path="res://signals/starter_signal/Signal.gd" type="Script" id=4]
+[ext_resource path="res://materials/ProceedLightMaterial.tres" type="Material" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.411765, 0.411765, 0.411765, 1 )
+
+[node name="Signal" type="CSGCombiner"]
+script = ExtResource( 4 )
+signal_state = 0
+
+[node name="Pole" type="CSGBox" parent="."]
+width = 0.125
+height = 1.5
+depth = 0.125
+material = SubResource( 1 )
+
+[node name="SignalBox" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+
+[node name="SignalBox" type="CSGBox" parent="SignalBox"]
+width = 0.5
+height = 1.0
+depth = 0.5
+material = ExtResource( 2 )
+
+[node name="ProceedLight" type="CSGSphere" parent="SignalBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0 )
+operation = 2
+radius = 0.125
+radial_segments = 8
+rings = 8
+material = ExtResource( 5 )
+
+[node name="OmniLight" type="OmniLight" parent="SignalBox/ProceedLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0, 0 )
+light_color = Color( 0, 1, 0, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="StopLight" type="CSGSphere" parent="SignalBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, 0 )
+operation = 2
+radius = 0.125
+radial_segments = 8
+rings = 8
+material = ExtResource( 2 )
+
+[node name="OmniLight" type="OmniLight" parent="SignalBox/StopLight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00999999, 0, 0 )
+visible = false
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 16.0
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 5, 4, 2 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CSGPolygon" type="CSGPolygon" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+polygon = PoolVector2Array( 0, 0, -1, 1.3, -1.45, 0.45, -1, 1.27 )
+depth = 4.0
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+polygon = PoolVector2Array( 0, 0, 1, 1.3, 1.45, 0.45, 1, 1.27 )
+depth = 4.0
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 5
+audio_bus_override = true
+audio_bus_name = "StationReverb"
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 1 )

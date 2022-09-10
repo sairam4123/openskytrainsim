@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/durg_ann.mp3-5af223292491e858398e832585912cdb.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/durg_ann.mp3"
+dest_files=[ "res://.import/durg_ann.mp3-5af223292491e858398e832585912cdb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

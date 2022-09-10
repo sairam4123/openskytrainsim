@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pdkt_ann.mp3-8bb908f710ba5830e58776a4e4edc327.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/pdkt_ann.mp3"
+dest_files=[ "res://.import/pdkt_ann.mp3-8bb908f710ba5830e58776a4e4edc327.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

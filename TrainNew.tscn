@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://trainset/PlayerEngine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TrainNew.gd" type="Script" id=2]
+[ext_resource path="res://trainset/Coach.tscn" type="PackedScene" id=5]
+[ext_resource path="res://coupling/Coupling.tscn" type="PackedScene" id=6]
+
+[node name="Train" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.172639, 0 )
+script = ExtResource( 2 )
+num_of_coaches = 9
+coach_node_path = NodePath("Consist/Coach")
+coupling_node_path = NodePath("Joints/Coupling")
+joints_node_path = NodePath("Joints")
+consist_node_path = NodePath("Consist")
+engine_node_path = NodePath("Consist/Engine")
+
+[node name="Consist" type="Spatial" parent="."]
+
+[node name="Engine" parent="Consist" instance=ExtResource( 1 )]
+mass = 400.0
+engine_name = "WAP 7"
+engine_torque_hp = 1805.56
+
+[node name="Coach" parent="Consist" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
+mass = 300.0
+
+[node name="Joints" type="Spatial" parent="."]
+
+[node name="Coupling" parent="Joints" instance=ExtResource( 6 )]
+node_a = NodePath("../../Consist/Engine")
+node_b = NodePath("../../Consist/Coach")

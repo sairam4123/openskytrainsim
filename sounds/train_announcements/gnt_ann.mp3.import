@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gnt_ann.mp3-298a22a666a0e186bf08547db1343ad8.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/gnt_ann.mp3"
+dest_files=[ "res://.import/gnt_ann.mp3-298a22a666a0e186bf08547db1343ad8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

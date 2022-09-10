@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/TrainOperations.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.00558659, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 50
+height = 10
+
+[node name="TrainOperations" type="Panel"]
+anchor_left = 0.0146413
+anchor_top = 0.851563
+anchor_right = 0.985359
+anchor_bottom = 0.950521
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 1306.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1286.0
+margin_bottom = 14.0
+text = "Train Operations Monitor"
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1286.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 1286.0
+margin_bottom = 26.0
+scroll_vertical_enabled = false
+
+[node name="Markers" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 1286.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+
+[node name="Coupling2" type="ColorRect" parent="MarginContainer/VBoxContainer/ScrollContainer/Markers"]
+visible = false
+margin_left = 62.0
+margin_top = 33.0
+margin_right = 92.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 30, 10 )
+size_flags_vertical = 4
+
+[node name="DefaultMarkers" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Coach" type="Label" parent="DefaultMarkers"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = 36.0
+margin_right = 62.0
+margin_bottom = 50.0
+text = "Engine"
+
+[node name="Coupling" type="Button" parent="DefaultMarkers"]
+unique_name_in_owner = true
+margin_left = 82.0
+margin_top = 36.0
+margin_right = 144.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 50, 10 )
+icon = SubResource( 2 )
+flat = true
+icon_align = 1

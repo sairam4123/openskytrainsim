@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/LHB60.wav-873008a548c3d340c4da9704351aeacc.sample"
+
+[deps]
+
+source_file="res://sounds/coach_sounds/LHB60.wav"
+dest_files=[ "res://.import/LHB60.wav-873008a548c3d340c4da9704351aeacc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

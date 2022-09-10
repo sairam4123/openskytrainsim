@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tpj_ann.mp3-3404dcd51433f3ef1573007d965bda07.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/tpj_ann.mp3"
+dest_files=[ "res://.import/tpj_ann.mp3-3404dcd51433f3ef1573007d965bda07.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

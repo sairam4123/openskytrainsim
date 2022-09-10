@@ -1,0 +1,320 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://station/Station.gd" type="Script" id=1]
+[ext_resource path="res://shaders/line.gdshader" type="Shader" id=2]
+[ext_resource path="res://station/StationSheets.tscn" type="PackedScene" id=3]
+[ext_resource path="res://station/EndBoard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://station/StationBoard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://speed_limit/SpeedLimit.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+albedo_color = Color( 0.215686, 0.286275, 0.360784, 0.647059 )
+
+[sub_resource type="SpatialMaterial" id=7]
+next_pass = SubResource( 9 )
+uv1_offset = Vector3( 5, 5, 5 )
+uv1_triplanar = true
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 7 )
+size = Vector3( 4, 1, 125 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 2 )
+shader_param/asphalt_color = Color( 0.5, 0.5, 0.5, 1 )
+shader_param/line_width = 0.03
+shader_param/center_line_distance = 0.8
+shader_param/center_line_color = Color( 1, 0.937255, 0, 1 )
+shader_param/edge_line_distance = 5.0
+shader_param/edge_line_color = Color( 1, 1, 0, 1 )
+shader_param/lane_line_amount = 0
+shader_param/lane_line_distance = 0.45
+shader_param/lane_line_spread = 0.2
+shader_param/lane_line_color = Color( 1, 1, 1, 1 )
+shader_param/lane_line_steeple = 6
+shader_param/offset = Vector2( 0, 0 )
+
+[sub_resource type="PlaneMesh" id=10]
+material = SubResource( 8 )
+size = Vector2( 4, 125 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1, 0.5, 62.5 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 10, 5, 75 )
+
+[node name="Station" type="StaticBody" groups=["station"]]
+collision_layer = 5
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+
+[node name="PlatformDecal" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0 )
+mesh = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 5 )
+
+[node name="AnnouncementPlayer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+
+[node name="StationBoard" type="Spatial" parent="AnnouncementPlayer"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard7" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard7"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard7"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard8" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard8"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard8"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard1" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard1"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard1"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard2" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard2"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard2"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard9" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard9"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard9"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard10" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 37.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard10"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard10"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard3" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 61.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard3"]
+max_db = 0.0
+stream_paused = true
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard3"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+stream_paused = true
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard4" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard4"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard4"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard5" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard5"]
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard5"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="StationBoard6" type="Spatial" parent="AnnouncementPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -61.5 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard6"]
+max_db = 0.0
+stream_paused = true
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="AnnouncementPlayer/StationBoard6"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+max_db = 0.0
+stream_paused = true
+max_distance = 50.0
+area_mask = 5
+emission_angle_enabled = true
+
+[node name="Area" type="Area" parent="." groups=["station"]]
+collision_layer = 4
+collision_mask = 2
+audio_bus_override = true
+audio_bus_name = "Station"
+reverb_bus_name = "Station"
+reverb_bus_amount = 0.2
+reverb_bus_uniformity = 0.22
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 6 )
+
+[node name="Boards" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+
+[node name="EndBoard" parent="Boards" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -61.5 )
+text = "Station"
+
+[node name="StationBoard" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, -50 )
+text = "Station"
+
+[node name="StationBoard2" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, -37.5 )
+text = "Station"
+
+[node name="StationBoard3" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, -25 )
+text = "Station"
+
+[node name="StationBoard4" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, -12.5 )
+text = "Station"
+
+[node name="StationBoard5" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, 0 )
+text = "Station"
+
+[node name="StationBoard6" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, 12.5 )
+text = "Station"
+
+[node name="StationBoard7" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, 25 )
+text = "Station"
+
+[node name="StationBoard8" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, 37.5 )
+text = "Station"
+
+[node name="StationBoard9" parent="Boards" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.25, 50 )
+text = "Station"
+
+[node name="EndBoard2" parent="Boards" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 61.5 )
+text = "Station"
+
+[node name="Sheets" type="Spatial" parent="."]
+
+[node name="Sheet1" parent="Sheets" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 3, 0 )
+
+[node name="Sheet2" parent="Sheets" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 3, -30 )
+
+[node name="Sheet3" parent="Sheets" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 3, 30 )
+
+[node name="SpeedLimit" type="Spatial" parent="."]
+
+[node name="SpeedLimit" parent="SpeedLimit" instance=ExtResource( 6 )]
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

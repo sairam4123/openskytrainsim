@@ -1,0 +1,79 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+<<<<<<<HEAD_global_script_classes=[ {
+"base": "Reference",
+"class": "StateDirectory",
+"language": "GDScript",
+"path": "res://addons/imjp94.yafsm/src/StateDirectory.gd"
+} ]
+_global_script_class_icons={
+"StateDirectory": ""
+}
+_global_script_classes=[ {
+"base": "Reference",
+"class": "StateDirectory",
+"language": "GDScript",
+"path": "res://addons/imjp94.yafsm/src/StateDirectory.gd"
+} ]
+
+[application]
+
+config/name="OpenSkyTrainSim"
+config/description="OpenSkyTrainSim is a train simulator where you can work as a loco pilot,
+ driving the train from station A to station B or work as a station master, 
+alloting platforms for incoming trains and make way for outgoing trains
+or work as a dispatcher, making way for trains by keeping track of VIP trains and 
+making way for them!
+
+This project is supposed to be a multiplayer project, there's bare bones structure for the
+multiplayer part of the game, hoping to add more features to the multiplayer!"
+run/main_scene="res://Lobby.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+SoundPlayer="*res://audio/SoundPlayer.gd"
+Players="*res://Players.gd"
+RouteServer="*res://route_system/RouteServer.gd"
+
+[debug]
+
+multirun/number_of_windows=2
+multirun/add_custom_args=true
+multirun/first_window_args="listen"
+multirun/other_window_args="join"
+multirun/window_distance=5
+
+[display]
+
+window/size/width=1366
+window/size/height=768
+window/dpi/allow_hidpi=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/imjp94.yafsm/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/tool_button/plugin.cfg" )
+
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Train"
+3d_physics/layer_3="Station"
+3d_physics/layer_5="TrainSet"
+3d_physics/layer_6="Couplers"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

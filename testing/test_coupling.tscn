@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://trainset/Coach.tscn" type="PackedScene" id=1]
+[ext_resource path="res://trainset/PlayerEngine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://testing/test_coupling.gd" type="Script" id=3]
+[ext_resource path="res://coupling/Coupling.tscn" type="PackedScene" id=4]
+[ext_resource path="res://coupling/Coupling.gd" type="Script" id=5]
+
+[node name="Train" type="Spatial"]
+script = ExtResource( 3 )
+consist_np = NodePath("Consist")
+joints_np = NodePath("Joints")
+coupling_np = NodePath("JointDefault/Coupling")
+
+[node name="Consist" type="Spatial" parent="."]
+
+[node name="Engine" parent="Consist" instance=ExtResource( 2 )]
+
+[node name="Coach" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
+
+[node name="Coach2" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.5 )
+
+[node name="Coach3" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 27 )
+
+[node name="Joints" type="Spatial" parent="."]
+
+[node name="Coupling" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Engine")
+node_b = NodePath("../../Consist/Coach")
+
+[node name="Coupling2" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach")
+node_b = NodePath("../../Consist/Coach2")
+
+[node name="Coupling3" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach2")
+node_b = NodePath("../../Consist/Coach3")
+
+[node name="JointDefault" type="Spatial" parent="."]
+
+[node name="Coupling" parent="JointDefault" instance=ExtResource( 4 )]

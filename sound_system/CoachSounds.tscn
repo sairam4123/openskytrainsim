@@ -1,0 +1,436 @@
+[gd_scene load_steps=59 format=2]
+
+[ext_resource path="res://sounds/coach_sounds/squeal.wav" type="AudioStream" id=1]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/FloatCondition.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://sound_system/CoachSounds.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=6]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=7]
+
+[sub_resource type="Resource" id=59]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( -112, -40 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=60]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 48, -40 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=61]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 339, -40 )
+}
+name = "Speed 10"
+
+[sub_resource type="Resource" id=34]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 1295, -40 )
+}
+name = "Speed 100"
+
+[sub_resource type="Resource" id=35]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 1468, -40 )
+}
+name = "Speed 120"
+
+[sub_resource type="Resource" id=36]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 1608, -40 )
+}
+name = "Speed 140"
+
+[sub_resource type="Resource" id=62]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 519, -40 )
+}
+name = "Speed 20"
+
+[sub_resource type="Resource" id=63]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 699, -40 )
+}
+name = "Speed 40"
+
+[sub_resource type="Resource" id=64]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 919, -40 )
+}
+name = "Speed 60"
+
+[sub_resource type="Resource" id=65]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 1079, -40 )
+}
+name = "Speed 80"
+
+[sub_resource type="Resource" id=56]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 199.5, 180 )
+}
+name = "Stopping"
+
+[sub_resource type="Resource" id=66]
+script = ExtResource( 3 )
+from = "Entry"
+to = "Idle"
+conditions = {
+}
+
+[sub_resource type="Resource" id=67]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 0.5
+
+[sub_resource type="Resource" id=68]
+script = ExtResource( 3 )
+from = "Idle"
+to = "Speed 10"
+conditions = {
+"speed": SubResource( 67 )
+}
+
+[sub_resource type="Resource" id=54]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 0.25
+
+[sub_resource type="Resource" id=55]
+script = ExtResource( 3 )
+from = "Speed 10"
+to = "Idle"
+conditions = {
+"speed": SubResource( 54 )
+}
+
+[sub_resource type="Resource" id=69]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 20.0
+
+[sub_resource type="Resource" id=70]
+script = ExtResource( 3 )
+from = "Speed 10"
+to = "Speed 20"
+conditions = {
+"speed": SubResource( 69 )
+}
+
+[sub_resource type="Resource" id=50]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 0.5
+
+[sub_resource type="Resource" id=51]
+script = ExtResource( 3 )
+from = "Speed 10"
+to = "Stopping"
+conditions = {
+"speed": SubResource( 50 )
+}
+
+[sub_resource type="Resource" id=41]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 120.0
+
+[sub_resource type="Resource" id=42]
+script = ExtResource( 3 )
+from = "Speed 100"
+to = "Speed 120"
+conditions = {
+"speed": SubResource( 41 )
+}
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 100.0
+
+[sub_resource type="Resource" id=40]
+script = ExtResource( 3 )
+from = "Speed 100"
+to = "Speed 80"
+conditions = {
+"speed": SubResource( 39 )
+}
+
+[sub_resource type="Resource" id=45]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 120.0
+
+[sub_resource type="Resource" id=46]
+script = ExtResource( 3 )
+from = "Speed 120"
+to = "Speed 100"
+conditions = {
+"speed": SubResource( 45 )
+}
+
+[sub_resource type="Resource" id=43]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 140.0
+
+[sub_resource type="Resource" id=44]
+script = ExtResource( 3 )
+from = "Speed 120"
+to = "Speed 140"
+conditions = {
+"speed": SubResource( 43 )
+}
+
+[sub_resource type="Resource" id=47]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 140.0
+
+[sub_resource type="Resource" id=48]
+script = ExtResource( 3 )
+from = "Speed 140"
+to = "Speed 120"
+conditions = {
+"speed": SubResource( 47 )
+}
+
+[sub_resource type="Resource" id=71]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 20.0
+
+[sub_resource type="Resource" id=72]
+script = ExtResource( 3 )
+from = "Speed 20"
+to = "Speed 10"
+conditions = {
+"speed": SubResource( 71 )
+}
+
+[sub_resource type="Resource" id=73]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 40.0
+
+[sub_resource type="Resource" id=74]
+script = ExtResource( 3 )
+from = "Speed 20"
+to = "Speed 40"
+conditions = {
+"speed": SubResource( 73 )
+}
+
+[sub_resource type="Resource" id=75]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 40.0
+
+[sub_resource type="Resource" id=76]
+script = ExtResource( 3 )
+from = "Speed 40"
+to = "Speed 20"
+conditions = {
+"speed": SubResource( 75 )
+}
+
+[sub_resource type="Resource" id=77]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 60.0
+
+[sub_resource type="Resource" id=78]
+script = ExtResource( 3 )
+from = "Speed 40"
+to = "Speed 60"
+conditions = {
+"speed": SubResource( 77 )
+}
+
+[sub_resource type="Resource" id=79]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 60.0
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 3 )
+from = "Speed 60"
+to = "Speed 40"
+conditions = {
+"speed": SubResource( 79 )
+}
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 80.0
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 3 )
+from = "Speed 60"
+to = "Speed 80"
+conditions = {
+"speed": SubResource( 25 )
+}
+
+[sub_resource type="Resource" id=37]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 100.0
+
+[sub_resource type="Resource" id=38]
+script = ExtResource( 3 )
+from = "Speed 80"
+to = "Speed 100"
+conditions = {
+"speed": SubResource( 37 )
+}
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 80.0
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 3 )
+from = "Speed 80"
+to = "Speed 60"
+conditions = {
+"speed": SubResource( 27 )
+}
+
+[sub_resource type="Resource" id=52]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 3
+value = 0.25
+
+[sub_resource type="Resource" id=53]
+script = ExtResource( 3 )
+from = "Stopping"
+to = "Idle"
+conditions = {
+"speed": SubResource( 52 )
+}
+
+[sub_resource type="Resource" id=57]
+script = ExtResource( 2 )
+name = "speed"
+comparation = 2
+value = 0.5
+
+[sub_resource type="Resource" id=58]
+script = ExtResource( 3 )
+from = "Stopping"
+to = "Speed 10"
+conditions = {
+"speed": SubResource( 57 )
+}
+
+[sub_resource type="Resource" id=80]
+script = ExtResource( 4 )
+name = ""
+states = {
+"Entry": SubResource( 59 ),
+"Idle": SubResource( 60 ),
+"Speed 10": SubResource( 61 ),
+"Speed 100": SubResource( 34 ),
+"Speed 120": SubResource( 35 ),
+"Speed 140": SubResource( 36 ),
+"Speed 20": SubResource( 62 ),
+"Speed 40": SubResource( 63 ),
+"Speed 60": SubResource( 64 ),
+"Speed 80": SubResource( 65 ),
+"Stopping": SubResource( 56 )
+}
+transitions = {
+"Entry": {
+"Idle": SubResource( 66 )
+},
+"Idle": {
+"Speed 10": SubResource( 68 )
+},
+"Speed 10": {
+"Idle": SubResource( 55 ),
+"Speed 20": SubResource( 70 ),
+"Stopping": SubResource( 51 )
+},
+"Speed 100": {
+"Speed 120": SubResource( 42 ),
+"Speed 80": SubResource( 40 )
+},
+"Speed 120": {
+"Speed 100": SubResource( 46 ),
+"Speed 140": SubResource( 44 )
+},
+"Speed 140": {
+"Speed 120": SubResource( 48 )
+},
+"Speed 20": {
+"Speed 10": SubResource( 72 ),
+"Speed 40": SubResource( 74 )
+},
+"Speed 40": {
+"Speed 20": SubResource( 76 ),
+"Speed 60": SubResource( 78 )
+},
+"Speed 60": {
+"Speed 40": SubResource( 24 ),
+"Speed 80": SubResource( 26 )
+},
+"Speed 80": {
+"Speed 100": SubResource( 38 ),
+"Speed 60": SubResource( 28 )
+},
+"Stopping": {
+"Idle": SubResource( 53 ),
+"Speed 10": SubResource( 58 )
+}
+}
+
+[node name="Sounds" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="CoachSoundPlayer" type="Node" parent="."]
+script = ExtResource( 7 )
+state_machine = SubResource( 80 )
+
+[node name="Squeal" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 1 )
+area_mask = 5
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[connection signal="transited" from="CoachSoundPlayer" to="." method="_on_CoachSoundPlayer_transited"]
