@@ -121,7 +121,7 @@ func _input(event):
 			for body in $Area.get_overlapping_bodies():
 				if body.is_in_group("engine"):
 					_on_timer_timeout(body)
-	
+
 
 func _on_Area_body_exited(body):
 	if body.is_in_group("engine"):

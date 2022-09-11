@@ -20,7 +20,7 @@ script = ExtResource( 4 )
 [node name="BellPlayer" parent="." index="6"]
 attenuation_model = 2
 unit_size = 4.0
-pitch_scale = 1.65
+pitch_scale = 1.35
 
 [node name="HornPlayer2" parent="." index="7"]
 attenuation_model = 2
@@ -28,7 +28,7 @@ attenuation_model = 2
 [node name="BellPlayer2" parent="." index="8"]
 attenuation_model = 2
 unit_size = 4.0
-pitch_scale = 1.65
+pitch_scale = 1.35
 
 [node name="Label3D" type="Label3D" parent="." index="22"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.74006, -2.88508 )

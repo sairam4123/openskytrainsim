@@ -11,7 +11,7 @@ func _ready():
 #	for i in range(16):
 #		print(get_position_to_spawn())
 
-func get_position_to_spawn(station = null):
+func get_position_to_spawn(station = null, preferred_dir = 0):
 	if not positions.size():
 		_generate_positions()
 #	print(positions)
@@ -24,14 +24,14 @@ func get_position_to_spawn(station = null):
 		push_error("Couldn't find a station to spawn, bailing out!")
 		return Vector3(INF, INF, INF)
 
-	var place = _choose_pos(position)
+	var place = _choose_pos(position, preferred_dir)
 	var idx = num_of_stations
 	while is_vec_inf(place) and idx > 1:
 		position = _pick_station(position)
 		if positions[position].used:
 			push_error("Couldn't find a station to spawn, bailing out!")
 			return Vector3(INF, INF, INF)
-		place = _choose_pos(position)
+		place = _choose_pos(position, preferred_dir)
 		idx -= 1
 	return place
 
@@ -55,9 +55,14 @@ func _choose_place(random_pos):
 		positions[random_pos].used = true
 	return Vector3(INF, INF, INF)
 
-func _choose_rot(pos, avail_pos) -> int:
+func _choose_rot(pos, avail_pos, preferred_dir = 0) -> int:
 	var avail_rot = avail_pos[pos].avail_rot
-	var rot = avail_rot.keys()[randi() % avail_rot.size()]
+	var rot
+	if preferred_dir:
+		rot = preferred_dir
+		print("preferring!", rot)
+	else:
+		rot = avail_rot.keys()[randi() % avail_rot.size()]
 	var idx = 20
 	while not avail_rot[rot] and idx > 1:
 		rot = avail_rot.keys()[randi() % avail_rot.size()]
@@ -67,14 +72,14 @@ func _choose_rot(pos, avail_pos) -> int:
 		return 0
 	return rot
 
-func _choose_pos(station) -> Vector3:
+func _choose_pos(station, preferred_dir = 0) -> Vector3:
 	var avail_pos = positions[station].avail_pos
 	var pos = avail_pos.keys()[randi() % avail_pos.size()]
 	var idx = 20
 	while not avail_pos[pos].avail and idx > 1:
 		pos = avail_pos.keys()[randi() % avail_pos.size()]
 		idx -= 1
-	var rot = _choose_rot(pos, avail_pos)
+	var rot = _choose_rot(pos, avail_pos, preferred_dir)
 	if rot in [-1, 1]:
 		return _construct_position(station, pos, rot)
 	if not avail_pos[pos].avail:

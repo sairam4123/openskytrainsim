@@ -1,8 +1,9 @@
 extends Control
 
 enum Direction {
-	FORWARD = -1
-	BACKWARD = 1
+	FORWARD = 1,
+	BACKWARD = -1,
+	RANDOM = 0
 }
 var route_id_mapper = {
 	
@@ -27,9 +28,11 @@ func _on_Button_pressed():
 	var ip_with_port = $"%IP".text.split(":")	
 	peer.create_server(int(ip_with_port[1]))
 	get_tree().network_peer = peer
+	var preferred_dir = $"%PreferredDirection".text.to_upper()
 	get_tree().set_meta("player_name", $"%Name".text)
 	get_tree().set_meta("route_name", route_id_mapper[$"%RouteName".text])
 	get_tree().set_meta("station_name", $"%StationName".text)
+	get_tree().set_meta("preferred_dir", Direction[preferred_dir])
 	RouteServer.routes.clear()
 	get_tree().change_scene("res://TrainNewTest.tscn")
 
@@ -38,9 +41,11 @@ func _on_Button2_pressed():
 	var ip_with_port = $"%IP".text.split(":")
 	print(peer.create_client(ip_with_port[0], int(ip_with_port[1])))
 	get_tree().network_peer = peer
+	var preferred_dir = $"%PreferredDirection".text.to_upper()
 	get_tree().set_meta("player_name", $"%Name".text)
 	get_tree().set_meta("station_name", $"%StationName".text)
-	RouteServer.routes.clear()	
+	get_tree().set_meta("preferred_dir", Direction[preferred_dir])
+	RouteServer.routes.clear()
 	get_tree().change_scene("res://TrainNewTest.tscn")
 
 # taken from https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
@@ -98,7 +103,7 @@ func _on_RouteName_item_selected(index):
 	
 	var station_name_station_map = {}
 	for station in route.get_stations():
-		if station.is_in_group("ignore_spawn"):
+		if station.is_in_group("ignore_spawn") or not station.is_in_group("station"):
 			continue
 		station_name_station_map[station.name] = station
 		station_selector.add_item(station.name)
@@ -125,13 +130,22 @@ func _on_StationName_item_selected(index):
 		station_mapping = station_selector.get_meta("station_mapping")
 	var station = station_mapping.get(station_name)
 	if not station:
+		direction_selector.clear()
+		direction_selector.add_item("Random")
 		direction_selector.disabled = true
 		return
-	
+
+	direction_selector.clear()
 	if station.is_in_group("terminal_station"):
-		print("You chose terminal!")
+		var idx = station.get_index()
+		var prev_station = station.get_parent().get_child(idx-1)
+		var next_station = station.get_parent().get_child(idx+1)
+		if prev_station.is_in_group('buffer'):
+			direction_selector.add_item("Backward")
+		elif next_station.is_in_group("buffer"):
+			direction_selector.add_item("Forward")
+			
 	else:
-		direction_selector.clear()
 		direction_selector.add_item("Random")
 		
 		direction_selector.add_item("Forward")

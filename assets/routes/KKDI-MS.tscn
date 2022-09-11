@@ -16,43 +16,46 @@
 route_name = "Pallavan Express Route (Chennai Egmore to Karaikudi Junction)"
 max_speed = 110
 
-[node name="Chennai Egmore" parent="Stations" index="0" groups=["terminal_station"] instance=ExtResource( 9 )]
+[node name="Buffer" type="Spatial" parent="Stations" index="0" groups=["buffer"]]
+
+[node name="Chennai Egmore" parent="Stations" index="1" groups=["terminal_station"] instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2000 )
 train_announcement = [ ExtResource( 1 ) ]
-announcement_volume = 15.563
+announcement_volume = 6.021
 time_on_station = 30.0
 
-[node name="Tambaram" parent="Stations" index="1" instance=ExtResource( 9 )]
+[node name="Tambaram" parent="Stations" index="2" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1500 )
 train_announcement = [ ExtResource( 8 ) ]
-announcement_volume = 12.041
+announcement_volume = 6.021
 
-[node name="Villupuram Jn" parent="Stations" index="2" instance=ExtResource( 9 )]
+[node name="Villupuram Jn" parent="Stations" index="3" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1000 )
 train_announcement = [ ExtResource( 7 ) ]
 autoplay = true
 time_on_station = 40.0
 
-[node name="Tiruchirapalli Jn" parent="Stations" index="3" instance=ExtResource( 9 )]
+[node name="Tiruchirapalli Jn" parent="Stations" index="4" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 train_announcement = [ ExtResource( 5 ), ExtResource( 2 ) ]
-announcement_volume = 6.021
 autoplay = true
 time_on_station = 40.0
 
-[node name="Pudukkottai" parent="Stations" index="4" instance=ExtResource( 9 )]
+[node name="Pudukkottai" parent="Stations" index="5" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -770 )
 train_announcement = [ ExtResource( 3 ) ]
 autoplay = true
 
-[node name="Karaikudi Jn" parent="Stations" index="5" groups=["terminal_station"] instance=ExtResource( 9 )]
+[node name="Karaikudi Jn" parent="Stations" index="6" groups=["terminal_station"] instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1536 )
 train_announcement = [ ExtResource( 6 ) ]
 announcement_volume = 6.021
 autoplay = true
 time_on_station = 50.0
 
-[node name="Secret Station" parent="Stations" index="6" groups=["ignore_spawn"] instance=ExtResource( 9 )]
+[node name="Buffer2" type="Spatial" parent="Stations" index="7" groups=["buffer"]]
+
+[node name="Secret Station" parent="Stations" index="8" groups=["ignore_spawn"] instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3000 )
 train_announcement = [ ExtResource( 4 ) ]
 announcement_volume = 6.021

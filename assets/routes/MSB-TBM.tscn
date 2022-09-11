@@ -9,41 +9,45 @@
 route_name = "Chennai Suburban Route (Chennai Beach to Tambaram)"
 max_speed = 80
 
-[node name="Chennai Beach" parent="Stations" index="0" instance=ExtResource( 3 )]
+[node name="BufferEnd" type="Spatial" parent="Stations" index="0" groups=["buffer"]]
+
+[node name="Chennai Beach" parent="Stations" index="1" groups=["terminal_station"] instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4500 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Chennai Egmore" parent="Stations" index="1" instance=ExtResource( 3 )]
+[node name="Chennai Egmore" parent="Stations" index="2" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3000 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Mambalam" parent="Stations" index="2" instance=ExtResource( 3 )]
+[node name="Mambalam" parent="Stations" index="3" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1000 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Saidapet" parent="Stations" index="3" instance=ExtResource( 3 )]
+[node name="Saidapet" parent="Stations" index="4" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -500 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Guindy" parent="Stations" index="4" instance=ExtResource( 3 )]
+[node name="Guindy" parent="Stations" index="5" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="St Thomas Mount" parent="Stations" index="5" instance=ExtResource( 3 )]
+[node name="St Thomas Mount" parent="Stations" index="6" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 500 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Trisulam" parent="Stations" index="6" instance=ExtResource( 3 )]
+[node name="Trisulam" parent="Stations" index="7" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1500 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Chrompet" parent="Stations" index="7" instance=ExtResource( 3 )]
+[node name="Chrompet" parent="Stations" index="8" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3000 )
 train_announcement = [ ExtResource( 1 ) ]
 
-[node name="Tambaram" parent="Stations" index="8" instance=ExtResource( 3 )]
+[node name="Tambaram" parent="Stations" index="9" groups=["terminal_station"] instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4000 )
 train_announcement = [ ExtResource( 1 ) ]
+
+[node name="BufferEnd2" type="Spatial" parent="Stations" index="10" groups=["buffer"]]
 
 [node name="Area" parent="SpeedLimits" index="0" instance=ExtResource( 4 )]
 speed_limit = 35

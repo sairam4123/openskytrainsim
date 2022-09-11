@@ -50,5 +50,5 @@ func server_disconnected():
 		delete_player(peer)
 	get_tree().change_scene("res://Lobby.tscn")
 
-func get_position_to_spawn(station = null):
-	return get_parent().get_position_to_spawn(station)
+func get_position_to_spawn(station = null, preferred_direction = 0):
+	return get_parent().get_position_to_spawn(station, preferred_direction)

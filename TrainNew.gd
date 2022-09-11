@@ -35,7 +35,8 @@ func _ready():
 		var station_name = get_tree().get_meta("station_name")
 		if not station_name.to_lower().begins_with("random"):
 			station = station_name
-		var pos = get_parent().get_position_to_spawn(station)
+		var preferred_dir = get_tree().get_meta("preferred_dir")
+		var pos = get_parent().get_position_to_spawn(station, preferred_dir)
 		if pos:
 			global_transform.origin.z = pos.z
 			global_transform.origin.x = pos.x
