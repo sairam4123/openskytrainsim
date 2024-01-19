@@ -41,8 +41,21 @@ func _process(delta):
 		$Label.text += "FPS: %s\n" % str(Engine.get_frames_per_second())
 
 func _on_Couplers_area_entered(area):
-	prints(name, "front", area, $Couplers)
+	if train.joints.has([self, area.get_parent()]):
+		return
+	if train != area.get_parent().train:
+		train.couple(area.get_parent().train)
+#	prints(name, "front", area, $Couplers)
+	train.join(self, area.get_parent())
+#	print(train.joints)
 
 
 func _on_Couplers2_area_entered(area):
-	prints(name, "back", area, $Couplers2)
+	if train.joints.has([area.get_parent(), self]):
+		return
+	if train != area.get_parent().train:
+		area.get_parent().train.couple(train)
+#	prints(name, "back", area, $Couplers2)
+	train.join(self, area.get_parent())
+#	print(train.joints)
+	

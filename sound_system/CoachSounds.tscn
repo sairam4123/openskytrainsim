@@ -431,6 +431,6 @@ stream = ExtResource( 1 )
 area_mask = 5
 
 [node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 
 [connection signal="transited" from="CoachSoundPlayer" to="." method="_on_CoachSoundPlayer_transited"]

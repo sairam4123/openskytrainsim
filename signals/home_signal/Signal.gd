@@ -4,7 +4,7 @@ extends CSGCombiner
 const signal_material = preload("res://materials/SignalMaterial.tres")
 
 enum SignalState {
-	CAUTION, PROCEED, STOP
+	CAUTION = 1, PROCEED = 2, STOP = 3
 }
 
 
@@ -52,9 +52,10 @@ func _process(delta):
 	update()
 
 func update():
-	if next_signal:
-		match next_signal.signal_state:
-			next_signal.SignalState.STOP:
-				self.signal_state = SignalState.CAUTION
-			next_signal.SignalState.PROCEED:
-				self.signal_state = SignalState.PROCEED
+	pass
+#	if next_signal:
+#		match next_signal.signal_state:
+#			next_signal.SignalState.STOP:
+#				self.signal_state = SignalState.CAUTION
+#			next_signal.SignalState.PROCEED:
+#				self.signal_state = SignalState.PROCEED

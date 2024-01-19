@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://materials/SignalMaterial.tres" type="Material" id=2]
 [ext_resource path="res://signals/starter_signal/Signal.gd" type="Script" id=4]
 [ext_resource path="res://materials/ProceedLightMaterial.tres" type="Material" id=5]
@@ -57,6 +56,3 @@ light_color = Color( 1, 0, 0, 1 )
 light_energy = 16.0
 light_specular = 0.0
 omni_range = 1.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 1 )

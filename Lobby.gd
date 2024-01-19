@@ -84,6 +84,7 @@ func _add_dir_contents(dir: Directory, files: Array, directories: Array):
 	dir.list_dir_end()
 
 
+
 func _on_RouteName_item_selected(index):
 	var station_selector = $"%StationName"
 	var route_selector = $"%RouteName" as OptionButton
@@ -102,19 +103,30 @@ func _on_RouteName_item_selected(index):
 	station_selector.add_item("Random")
 	
 	var station_name_station_map = {}
+	var idx = 1
 	for station in route.get_stations():
+		var next_station = station.get_parent().get_child(idx+1)
 		if station.is_in_group("ignore_spawn") or not station.is_in_group("station"):
 			continue
 		station_name_station_map[station.name] = station
 		station_selector.add_item(station.name)
+		print(station.name, next_station.name)
+		idx += 1
+		if station.is_in_group("terminal_station") and next_station:
+			if next_station.is_in_group("buffer"):
+				break
 	station_selector.set_meta("station_mapping", station_name_station_map)
 	
 	
 func set_disabled_buttons(disabled: bool):
 	var station_selector = $"%StationName"
+	var direction_selector = $"%PreferredDirection"
+	
 	var host_button = $"%Host"
 	var join_button = $"%Join"
 	station_selector.disabled = disabled
+	direction_selector.disabled = disabled
+	
 	host_button.disabled = disabled
 	join_button.disabled = disabled
 
@@ -123,6 +135,11 @@ func _on_StationName_item_selected(index):
 	# Station selected!
 	var station_selector = $"%StationName"
 	var direction_selector = $"%PreferredDirection"
+	var route_selector = $"%RouteName" as OptionButton
+	
+	var route_name = route_selector.get_item_text(route_selector.selected)
+	var route = RouteServer.get_route(route_name)
+	
 	
 	var station_name = station_selector.get_item_text(index)
 	var station_mapping = {}
@@ -132,7 +149,9 @@ func _on_StationName_item_selected(index):
 	if not station:
 		direction_selector.clear()
 		direction_selector.add_item("Random")
-		direction_selector.disabled = true
+		direction_selector.add_item("Forward")
+		direction_selector.add_item("Backward")
+		direction_selector.disabled = false
 		return
 
 	direction_selector.clear()
@@ -141,9 +160,15 @@ func _on_StationName_item_selected(index):
 		var prev_station = station.get_parent().get_child(idx-1)
 		var next_station = station.get_parent().get_child(idx+1)
 		if prev_station.is_in_group('buffer'):
-			direction_selector.add_item("Backward")
+			if route.station_layout_reversed:
+				direction_selector.add_item("Forward")
+			else:
+				direction_selector.add_item("Backward")
 		elif next_station.is_in_group("buffer"):
-			direction_selector.add_item("Forward")
+			if route.station_layout_reversed:
+				direction_selector.add_item("Backward")
+			else:
+				direction_selector.add_item("Forward")
 			
 	else:
 		direction_selector.add_item("Random")

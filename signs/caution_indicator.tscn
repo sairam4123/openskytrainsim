@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://signs/caution_indicator.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=19]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec4 color1: hint_color;
+uniform vec4 color2: hint_color;
+uniform float strip_count = 10;
+uniform float direction = 1;
+uniform float width_shift = 0.5;
+
+
+void fragment() {
+	float pos = mix(UV.x, UV.y, direction) * strip_count;
+	float value = floor(fract(pos) + width_shift);
+	ALBEDO = mix(color1, color2, value).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 19 )
+shader_param/color1 = Color( 0.25, 0.25, 0.25, 1 )
+shader_param/color2 = null
+shader_param/strip_count = 4.0
+shader_param/direction = 1.0
+shader_param/width_shift = 0.5
+
+[sub_resource type="CylinderMesh" id=21]
+top_radius = 0.031
+bottom_radius = 0.031
+height = 2.75
+
+[sub_resource type="SpatialMaterial" id=25]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=26]
+albedo_color = Color( 1.5, 1.5, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=23]
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderMesh" id=24]
+material = SubResource( 23 )
+top_radius = 0.067
+bottom_radius = 0.067
+height = 0.04
+
+[node name="CautionIndicator" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.509, 0 )
+material_override = SubResource( 20 )
+mesh = SubResource( 21 )
+
+[node name="Sign" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.02 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="Sign"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.864, 0.02 )
+polygon = PoolVector2Array( 0.25, -0.25, 0.008, 0, 0.25, 0.25, -0.25, 0.25, -0.008, 0, -0.25, -0.25 )
+depth = 0.04
+material = SubResource( 25 )
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="Sign"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.864, 0.01 )
+polygon = PoolVector2Array( 0.75, -0.25, 0.5, 0, 0.75, 0.25, -0.5, 0.25, -0.75, 0, -0.5, -0.25 )
+depth = 0.02
+material = SubResource( 26 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Sign"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.3, 1.864, 0 )
+mesh = SubResource( 24 )
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3" type="MeshInstance" parent="Sign"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.3, 1.864, 0 )
+mesh = SubResource( 24 )
+skeleton = NodePath("../..")

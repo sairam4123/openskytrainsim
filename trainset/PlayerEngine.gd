@@ -7,6 +7,9 @@ func _input(event):
 	if not is_network_master():
 		return
 	if event is InputEventKey:
+		
+		if event.scancode == KEY_SHIFT:
+			$StateMachinePlayer.set_param("shift_pressed", event.pressed)
 		if event.scancode == KEY_P and $StateMachinePlayer.current == "Stopped" and event.pressed:
 			$StateMachinePlayer.set_trigger("start_button_pressed")
 			_state_machine_rpc("start_button_pressed")

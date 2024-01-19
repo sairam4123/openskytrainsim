@@ -25,6 +25,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.5 )
 [node name="Coach3" parent="Consist" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 27 )
 
+[node name="Coach4" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36.5 )
+
+[node name="Coach5" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46 )
+
+[node name="Coach6" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 55.5 )
+
+[node name="Coach7" parent="Consist" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65 )
+
 [node name="Joints" type="Spatial" parent="."]
 
 [node name="Coupling" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
@@ -41,6 +53,26 @@ node_b = NodePath("../../Consist/Coach2")
 script = ExtResource( 5 )
 node_a = NodePath("../../Consist/Coach2")
 node_b = NodePath("../../Consist/Coach3")
+
+[node name="Coupling4" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach3")
+node_b = NodePath("../../Consist/Coach4")
+
+[node name="Coupling5" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach4")
+node_b = NodePath("../../Consist/Coach5")
+
+[node name="Coupling6" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach5")
+node_b = NodePath("../../Consist/Coach6")
+
+[node name="Coupling7" type="Spatial" parent="Joints" instance=ExtResource( 4 )]
+script = ExtResource( 5 )
+node_a = NodePath("../../Consist/Coach6")
+node_b = NodePath("../../Consist/Coach7")
 
 [node name="JointDefault" type="Spatial" parent="."]
 

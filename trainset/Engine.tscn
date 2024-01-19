@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=1]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=2]
@@ -14,46 +14,61 @@
 [ext_resource path="res://HornPlayer.gd" type="Script" id=12]
 [ext_resource path="res://icon.png" type="Texture" id=13]
 [ext_resource path="res://sound_system/CoachSounds.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" type="Script" id=15]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( -32, 120 )
+"graph_offset": Vector2( -132, 140 )
 }
 name = "Entry"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( 548, 20 )
+"graph_offset": Vector2( 908, 160 )
 }
 name = "Idle"
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( 343, 40 )
+"graph_offset": Vector2( 463, 160 )
 }
 name = "Starting"
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=86]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( 142, 120 )
+"graph_offset": Vector2( 319, 20 )
+}
+name = "Starting2"
+
+[sub_resource type="Resource" id=107]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 102, 180 )
 }
 name = "Stopped"
 
 [sub_resource type="Resource" id=5]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( 359.5, 200 )
+"graph_offset": Vector2( 319.5, 500 )
 }
 name = "Stopping"
+
+[sub_resource type="Resource" id=87]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 395.5, 300 )
+}
+name = "Stopping2"
 
 [sub_resource type="Resource" id=6]
 script = ExtResource( 5 )
 __meta__ = {
-"graph_offset": Vector2( 636.5, 180 )
+"graph_offset": Vector2( 976.5, 440 )
 }
 name = "Throttling"
 
@@ -64,6 +79,12 @@ to = "Stopped"
 conditions = {
 }
 
+[sub_resource type="Resource" id=101]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = false
+
 [sub_resource type="Resource" id=8]
 script = ExtResource( 2 )
 name = "stop_button_pressed"
@@ -73,7 +94,27 @@ script = ExtResource( 3 )
 from = "Idle"
 to = "Stopping"
 conditions = {
+"shift_pressed": SubResource( 101 ),
 "stop_button_pressed": SubResource( 8 )
+}
+
+[sub_resource type="Resource" id=102]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = true
+
+[sub_resource type="Resource" id=88]
+script = ExtResource( 2 )
+name = "stop_button_pressed"
+
+[sub_resource type="Resource" id=90]
+script = ExtResource( 3 )
+from = "Idle"
+to = "Stopping2"
+conditions = {
+"shift_pressed": SubResource( 102 ),
+"stop_button_pressed": SubResource( 88 )
 }
 
 [sub_resource type="Resource" id=10]
@@ -102,6 +143,24 @@ conditions = {
 "started": SubResource( 12 )
 }
 
+[sub_resource type="Resource" id=97]
+script = ExtResource( 2 )
+name = "started"
+
+[sub_resource type="Resource" id=98]
+script = ExtResource( 3 )
+from = "Starting2"
+to = "Idle"
+conditions = {
+"started": SubResource( 97 )
+}
+
+[sub_resource type="Resource" id=103]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = false
+
 [sub_resource type="Resource" id=14]
 script = ExtResource( 2 )
 name = "start_button_pressed"
@@ -111,7 +170,27 @@ script = ExtResource( 3 )
 from = "Stopped"
 to = "Starting"
 conditions = {
+"shift_pressed": SubResource( 103 ),
 "start_button_pressed": SubResource( 14 )
+}
+
+[sub_resource type="Resource" id=104]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = true
+
+[sub_resource type="Resource" id=91]
+script = ExtResource( 2 )
+name = "start_button_pressed"
+
+[sub_resource type="Resource" id=93]
+script = ExtResource( 3 )
+from = "Stopped"
+to = "Starting2"
+conditions = {
+"shift_pressed": SubResource( 104 ),
+"start_button_pressed": SubResource( 91 )
 }
 
 [sub_resource type="Resource" id=16]
@@ -124,6 +203,18 @@ from = "Stopping"
 to = "Stopped"
 conditions = {
 "stopped": SubResource( 16 )
+}
+
+[sub_resource type="Resource" id=100]
+script = ExtResource( 2 )
+name = "stopped"
+
+[sub_resource type="Resource" id=99]
+script = ExtResource( 3 )
+from = "Stopping2"
+to = "Stopped"
+conditions = {
+"stopped": SubResource( 100 )
 }
 
 [sub_resource type="Resource" id=18]
@@ -140,6 +231,12 @@ conditions = {
 "throttle": SubResource( 18 )
 }
 
+[sub_resource type="Resource" id=105]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = false
+
 [sub_resource type="Resource" id=21]
 script = ExtResource( 2 )
 name = "stop_button_pressed"
@@ -149,7 +246,27 @@ script = ExtResource( 3 )
 from = "Throttling"
 to = "Stopping"
 conditions = {
+"shift_pressed": SubResource( 105 ),
 "stop_button_pressed": SubResource( 21 )
+}
+
+[sub_resource type="Resource" id=106]
+script = ExtResource( 15 )
+name = "shift_pressed"
+comparation = 0
+value = true
+
+[sub_resource type="Resource" id=94]
+script = ExtResource( 2 )
+name = "stop_button_pressed"
+
+[sub_resource type="Resource" id=96]
+script = ExtResource( 3 )
+from = "Throttling"
+to = "Stopping2"
+conditions = {
+"shift_pressed": SubResource( 106 ),
+"stop_button_pressed": SubResource( 94 )
 }
 
 [sub_resource type="Resource" id=20]
@@ -159,8 +276,10 @@ states = {
 "Entry": SubResource( 1 ),
 "Idle": SubResource( 2 ),
 "Starting": SubResource( 3 ),
-"Stopped": SubResource( 4 ),
+"Starting2": SubResource( 86 ),
+"Stopped": SubResource( 107 ),
 "Stopping": SubResource( 5 ),
+"Stopping2": SubResource( 87 ),
 "Throttling": SubResource( 6 )
 }
 transitions = {
@@ -169,26 +288,36 @@ transitions = {
 },
 "Idle": {
 "Stopping": SubResource( 9 ),
+"Stopping2": SubResource( 90 ),
 "Throttling": SubResource( 11 )
 },
 "Starting": {
 "Idle": SubResource( 13 )
 },
+"Starting2": {
+"Idle": SubResource( 98 )
+},
 "Stopped": {
-"Starting": SubResource( 15 )
+"Starting": SubResource( 15 ),
+"Starting2": SubResource( 93 )
 },
 "Stopping": {
 "Stopped": SubResource( 17 )
 },
+"Stopping2": {
+"Stopped": SubResource( 99 )
+},
 "Throttling": {
 "Idle": SubResource( 19 ),
-"Stopping": SubResource( 22 )
+"Stopping": SubResource( 22 ),
+"Stopping2": SubResource( 96 )
 }
 }
 
 [sub_resource type="SpatialMaterial" id=33]
 albedo_color = Color( 1, 0.631373, 0, 1 )
 albedo_texture = ExtResource( 13 )
+metallic = 0.5
 uv1_scale = Vector3( 5, 5, 5 )
 uv1_triplanar = true
 
@@ -200,6 +329,38 @@ uv1_triplanar = true
 
 [sub_resource type="BoxShape" id=23]
 extents = Vector3( 1, 1, 3 )
+
+[sub_resource type="Animation" id=84]
+resource_name = "Panto2DownAnim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pantograph2:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5, 3.7, 4, 4.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3, -2.5 ), Vector3( 0, 2.15, -2.5 ), Vector3( 0, 2.2, -2.5 ), Vector3( 0, 2.1, -2.5 ) ]
+}
+
+[sub_resource type="Animation" id=85]
+resource_name = "Panto2UpAnim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pantograph2:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.8, 1.2, 3.8, 4.2, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.1, -2.5 ), Vector3( 0, 2.2, -2.5 ), Vector3( 0, 2.15, -2.5 ), Vector3( 0, 3.05, -2.5 ), Vector3( 0, 2.95, -2.5 ), Vector3( 0, 3, -2.5 ) ]
+}
 
 [sub_resource type="Animation" id=80]
 resource_name = "PantoDownAnim"
@@ -245,7 +406,19 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 2.104, 2.5 ) ]
+"values": [ Vector3( 0, 2.1, 2.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pantograph2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.1, -2.5 ) ]
 }
 
 [sub_resource type="CylinderMesh" id=83]
@@ -287,8 +460,9 @@ doppler_tracking = 1
 
 [node name="Label" type="Label" parent="."]
 visible = false
+margin_left = 50.0
 margin_top = 200.0
-margin_right = 58.0
+margin_right = 108.0
 margin_bottom = 214.0
 text = "Throttle: "
 
@@ -344,7 +518,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, 2 )
 use_as_traction = true
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 955.0
+suspension_max_force = 36000.0
 
 [node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -361,7 +535,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, 2 )
 use_as_traction = true
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 955.0
+suspension_max_force = 36000.0
 
 [node name="MeshInstance2" type="CSGCylinder" parent="VehicleWheel2"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -379,7 +553,7 @@ use_as_traction = true
 use_as_steering = true
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 955.0
+suspension_max_force = 36000.0
 
 [node name="MeshInstance3" type="CSGCylinder" parent="VehicleWheel3"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -397,7 +571,7 @@ use_as_traction = true
 use_as_steering = true
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 955.0
+suspension_max_force = 36000.0
 
 [node name="MeshInstance3" type="CSGCylinder" parent="VehicleWheel4"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -434,12 +608,18 @@ spot_range = 10.0
 spot_angle = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Panto2DownAnim = SubResource( 84 )
+anims/Panto2UpAnim = SubResource( 85 )
 anims/PantoDownAnim = SubResource( 80 )
 anims/PantoUpAnim = SubResource( 81 )
 anims/RESET = SubResource( 82 )
 
 [node name="Pantograph" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.104, 2.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 2.5 )
+mesh = SubResource( 83 )
+
+[node name="Pantograph2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -2.5 )
 mesh = SubResource( 83 )
 
 [node name="Sounds" parent="." instance=ExtResource( 14 )]

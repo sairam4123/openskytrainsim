@@ -149,21 +149,34 @@ remote func sync_props(synced_props):
 #	$Label3D.text = str(get_tree().get_rpc_sender_id()) + " " + str($StateMachinePlayer.get_current()) + " " + str(horn_pressed)
 
 func _on_StateMachinePlayer_transited(from, to):
-	if from == "Stopped" and to == "Starting":
+	if from == "Stopped" and to in ["Starting", "Starting2"]:
 		$PantoUpPlayer.play()
 		$IdleSoundPlayer.play()
-		$AnimationPlayer.play("PantoUpAnim")
+		match to:
+			"Starting":
+				$PantoUpPlayer.translation.z = $Pantograph.translation.z
+				$AnimationPlayer.play("PantoUpAnim")
+			"Starting2":
+				$PantoUpPlayer.translation.z = $Pantograph2.translation.z
+				$AnimationPlayer.play("Panto2UpAnim")
 		new_pitch = 1
 		current_pitch = $IdleSoundPlayer.pitch_scale
 		print("starting engine", get_tree().get_network_unique_id())
 		yield($PantoUpPlayer, "finished")
 		$StateMachinePlayer.set_trigger("started")
-	if from in ["Idle", "Throttling"] and to == "Stopping":
+	if from in ["Idle", "Throttling"] and to in ["Stopping", "Stopping2"]:
 		new_pitch = 0.01
 		current_pitch = $IdleSoundPlayer.pitch_scale
 		print("Stopping Engine", get_tree().get_network_unique_id())
 		$PantoDownPlayer.play()
-		$AnimationPlayer.play_backwards("PantoUpAnim")
+		match to:
+			"Stopping":
+				$AnimationPlayer.play_backwards("PantoUpAnim")
+				$PantoDownPlayer.translation.z = $Pantograph.translation.z
+			"Stopping2":
+				$AnimationPlayer.play_backwards("Panto2UpAnim")
+				$PantoDownPlayer.translation.z = $Pantograph2.translation.z
+		
 		yield($PantoDownPlayer, "finished")
 		$StateMachinePlayer.set_trigger("stopped")
 	if from == "Idle" and to == "Throttling":
@@ -188,4 +201,6 @@ func _on_StateMachinePlayer_transited(from, to):
 		"Throttling":
 			print("Throttling!", get_tree().get_network_unique_id())
 		"Stopped":
+			if !is_inside_tree():
+				return
 			print("Stopped", get_tree().get_network_unique_id())

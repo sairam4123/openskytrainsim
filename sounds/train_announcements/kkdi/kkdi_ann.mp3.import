@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/kkdi_ann.mp3-3825a762a3d661d268cdac1f4a583328.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/kkdi/kkdi_ann.mp3"
+dest_files=[ "res://.import/kkdi_ann.mp3-3825a762a3d661d268cdac1f4a583328.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

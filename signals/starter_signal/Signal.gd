@@ -6,7 +6,7 @@ signal state_changed
 const signal_material = preload("res://materials/SignalMaterial.tres")
 
 enum SignalState {
-	PROCEED, STOP
+	PROCEED = 2, STOP = 3
 }
 
 export(NodePath) var next_signal_np setget set_next_signal
@@ -45,11 +45,13 @@ func set_next_signal(val):
 
 func update():
 	if next_signal:
-		match next_signal.signal_state:
-			next_signal.SignalState.STOP:
-				self.signal_state = SignalState.STOP
-			next_signal.SignalState.PROCEED:
-				self.signal_state = SignalState.PROCEED
+		pass
+	
+#		match next_signal.signal_state:
+#			next_signal.SignalState.STOP:
+#				self.signal_state = SignalState.STOP
+#			next_signal.SignalState.PROCEED:
+#				self.signal_state = SignalState.PROCEED
 
-func _ready():
-	set("signal_state", signal_state)
+#func _ready():
+#	set("signal_state", signal_state)

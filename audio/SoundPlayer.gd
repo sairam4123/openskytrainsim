@@ -6,7 +6,7 @@ extends Spatial
 
 var currently_playing = {}
 
-func play_audio(audio_file: AudioStream, node: Node = null, loop = false, backward = false, audio_class = AudioStreamPlayer, position = null, volume = 100, area_mask = 1):
+func play_audio(audio_file: AudioStream, node: Node = null, loop = false, backward = false, audio_class = AudioStreamPlayer, position = null, volume = 100, area_mask = 1, dopple_idle = true):
 	var new_audio = audio_class.new()
 	if audio_class in [AudioStreamPlayer2D, AudioStreamPlayer3D]:
 		new_audio.area_mask = area_mask
@@ -28,6 +28,8 @@ func play_audio(audio_file: AudioStream, node: Node = null, loop = false, backwa
 	else: new_audio.volume_db = linear2db(float(volume)/100.0)
 	if audio_class == AudioStreamPlayer3D:
 		new_audio.max_distance = 55
+		if dopple_idle:
+			new_audio.doppler_tracking = audio_class.DOPPLER_TRACKING_IDLE_STEP
 	new_audio.play()
 	if not loop:
 		yield(new_audio, "finished")
@@ -68,7 +70,7 @@ func play_audio_2D(audio_file: AudioStream, position: Vector2, node: Node, loop 
 #func play_random(sound_type = "residential"):
 #	play_audio(sounds[randi() % sounds.size()])
 #
-func play_audio_crossfade(previous_audio_player, audio_stream: AudioStream, node: Node, duration = 1, position = null, volume = 100, area_mask: int = 1, audio_class = AudioStreamPlayer3D, loop = true, backward = false):
+func play_audio_crossfade(previous_audio_player, audio_stream: AudioStream, node: Node, duration = 1, position = null, volume = 100, area_mask: int = 1, audio_class = AudioStreamPlayer3D, loop = true, backward = false, doppler_idle = true):
 	var new_audio
 	if previous_audio_player != null and !currently_playing.has(previous_audio_player):
 		return
@@ -79,7 +81,7 @@ func play_audio_crossfade(previous_audio_player, audio_stream: AudioStream, node
 		else:
 			tween.interpolate_property(previous_audio_player, "volume_db", previous_audio_player.volume_db, linear2db(0.01), duration, Tween.TRANS_QUINT, Tween.EASE_IN)
 	if audio_stream:
-		new_audio = play_audio(audio_stream, node, loop, backward, audio_class, position, 0.01, area_mask)
+		new_audio = play_audio(audio_stream, node, loop, backward, audio_class, position, 0.01, area_mask, doppler_idle)
 		if new_audio is AudioStreamPlayer3D:
 			tween.interpolate_property(new_audio, "unit_db", new_audio.unit_db, linear2db(float(volume)/100.0), duration, Tween.TRANS_QUINT, Tween.EASE_OUT)
 		else:

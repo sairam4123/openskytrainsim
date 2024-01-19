@@ -26,17 +26,19 @@ custom_constants/separation = 10
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 177.0
+margin_top = 194.0
 margin_right = 766.0
-margin_bottom = 191.0
+margin_bottom = 208.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "LOBBY"
+text = "Main Menu"
 align = 1
 valign = 1
 clip_text = true
+uppercase = true
 
 [node name="IP" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 201.0
 margin_right = 766.0
 margin_bottom = 225.0
@@ -57,9 +59,9 @@ size_flags_horizontal = 3
 text = "127.0.0.1:5000"
 
 [node name="Name" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 235.0
+margin_top = 218.0
 margin_right = 766.0
-margin_bottom = 259.0
+margin_bottom = 242.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Name"]
@@ -77,9 +79,9 @@ size_flags_horizontal = 3
 placeholder_text = "Your name here"
 
 [node name="RouteName" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 269.0
+margin_top = 252.0
 margin_right = 766.0
-margin_bottom = 289.0
+margin_bottom = 272.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RouteName"]
@@ -100,9 +102,9 @@ items = [ "No route selected", null, false, 0, null ]
 selected = 0
 
 [node name="StationName" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 299.0
+margin_top = 282.0
 margin_right = 766.0
-margin_bottom = 319.0
+margin_bottom = 302.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StationName"]
@@ -124,9 +126,9 @@ items = [ "Random", null, false, 0, null ]
 selected = 0
 
 [node name="PreferredDirection" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 329.0
+margin_top = 312.0
 margin_right = 766.0
-margin_bottom = 360.0
+margin_bottom = 343.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PreferredDirection"]
@@ -146,26 +148,27 @@ hint_tooltip = "Not used if joined in Servers, only support for Host"
 size_flags_horizontal = 3
 disabled = true
 text = "Random"
-items = [ "Random", null, false, 0, null ]
+items = [ "Random", null, false, 0, null, "Forward", null, false, 1, null, "Backward", null, false, 2, null ]
 selected = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 370.0
+margin_top = 353.0
 margin_right = 766.0
-margin_bottom = 390.0
+margin_bottom = 373.0
 size_flags_horizontal = 3
 custom_constants/separation = 100
 
 [node name="Host" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 333.0
+margin_right = 766.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
-text = "HOST"
+text = "Start Game"
 
 [node name="Join" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 margin_left = 433.0
 margin_right = 766.0
 margin_bottom = 20.0

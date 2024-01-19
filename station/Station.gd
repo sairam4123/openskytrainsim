@@ -8,20 +8,32 @@ export(float) var announcement_volume: float setget set_ann_player_vol
 export(bool) var playing: bool setget set_ann_player_playing
 export(bool) var autoplay: bool setget set_ann_player_autoplay
 export(float) var time_on_station: float = 20
+export(float) var time_between_ann: float = 5
+
+export var ann_index = 0
 
 var timers = {}
 func _ready():
 	if not train_announcement.empty():
 		set_announcement_players_stream(train_announcement, announcement_volume, playing)
 	set_board_text(name)
+	
+	var children = get_children_by_type($AnnouncementPlayer, "AudioStreamPlayer3D")
+	var ply = children[0]
+	if not ply.is_connected("finished", self, "_change_ann"):
+			ply.connect("finished", self, "_change_ann")
+	
 	if !Engine.editor_hint:
 		print(name)
 		play()
+#		$Signal._signal_state = $Signal.SignalState.STOP
+#		$Signal2._signal_state = $Signal2.SignalState.STOP
 		
+	
 	
 
 func _process(_delta):
-	_handle_stop_time()
+#	_handle_stop_time()
 	if !Engine.editor_hint:
 		return
 	set_board_text(name)
@@ -42,6 +54,10 @@ func _handle_stop_time():
 func set_board_text(text: String):
 	for board in $Boards.get_children():
 		board.text = text
+	for sheets in $Sheets.get_children():
+		for board in sheets.get_children():
+			if board.is_in_group("station_board"):
+				board.text = text
 
 func get_children_by_type(node, type):
 	var arr = []
@@ -63,8 +79,9 @@ func set_ann_player_st(st: Array):
 	if !is_inside_tree():
 		return
 	var children = get_children_by_type($AnnouncementPlayer, "AudioStreamPlayer3D")
+	ann_index %= train_announcement.size()
 	for player in children:
-		player.stream = train_announcement[0]
+		player.stream = train_announcement[ann_index]
 
 func set_ann_player_vol(vol: float):
 	announcement_volume = vol
@@ -96,8 +113,25 @@ func play():
 	prints("playing", name)
 	var children = get_children_by_type($AnnouncementPlayer, "AudioStreamPlayer3D")
 	
+	var ply = children[0]
+	if not ply.is_connected("finished", self, "_change_ann"):
+			ply.connect("finished", self, "_change_ann")
 	for player in children:
 		player.play()
+
+
+func _change_ann():
+	ann_index += 1
+	ann_index %= train_announcement.size()
+
+	yield(get_tree().create_timer(time_between_ann), "timeout")
+	var children = get_children_by_type($AnnouncementPlayer, "AudioStreamPlayer3D")
+	
+	for player in children:
+		player.stream = train_announcement[ann_index]
+		player.play()
+	
+	
 
 func stop():
 	var children = get_children_by_type($AnnouncementPlayer, "AudioStreamPlayer3D")	
@@ -134,8 +168,17 @@ func _on_timer_timeout(body: Spatial):
 	var pos = body.global_transform.origin
 	var point = Geometry.get_closest_point_to_segment(pos, $Boards/EndBoard.global_transform.origin, $Boards/EndBoard2.global_transform.origin)
 	print(point)
+#	var proceed = SoundPlayer.play(preload("res://sounds/d_perm_03.wav"), self, 150)
 	yield(SoundPlayer.play_audio_3D(audio, to_local(point), self, 150), "completed")
+#	yield(proceed, "completed")
 	print("OK to depart, ", body.engine_name)
+	prints(body.train.direction, $Signal.direction)
+	if body.train.direction == $Signal.direction:
+		$Signal._signal_state = $Signal.signal_inst.SignalState.PROCEED
+	elif body.train.direction == $Signal2.direction:
+		$Signal2._signal_state = $Signal2.signal_inst.SignalState.PROCEED
+		
+	
 	timers[body].set_meta("ok_to_depart", true)
 	timers[body].stop()
 

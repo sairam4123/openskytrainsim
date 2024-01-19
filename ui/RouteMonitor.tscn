@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/RouteMonitor.gd" type="Script" id=1]
 [ext_resource path="res://icons/direction_icon.png" type="Texture" id=2]
+[ext_resource path="res://ui/signals/stop.tres" type="Gradient" id=3]
+[ext_resource path="res://ui/signals/caution.tres" type="Gradient" id=4]
+[ext_resource path="res://ui/signals/attention.tres" type="Gradient" id=5]
+[ext_resource path="res://ui/signals/proceed.tres" type="Gradient" id=6]
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
@@ -30,13 +34,31 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
-shader_param/dist_frm_cent = 0.35
+shader_param/dist_frm_cent = 0.36
 shader_param/invert = true
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = SubResource( 7 )
-shader_param/dist_frm_cent = 0.35
+shader_param/dist_frm_cent = 0.36
 shader_param/invert = false
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform sampler2D gradient_texture;
+
+void fragment() {
+	vec2 uv = (UV - 0.5) * 2.0;
+	float d = step(0.8, length(uv));
+	COLOR = mix(texture(gradient_texture, vec2(UV.y, 0.5)), vec4(0, 0, 0, 0), d);
+}"
+
+[sub_resource type="GradientTexture" id=12]
+gradient = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 10 )
+shader_param/gradient_texture = SubResource( 12 )
 
 [node name="Panel" type="Panel"]
 anchor_left = 1.0
@@ -48,6 +70,7 @@ margin_bottom = 351.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource( 1 )
+grads = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ) ]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -119,7 +142,7 @@ text = "50 kmph"
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 visible = false
 margin_top = 40.0
-margin_right = 148.0
+margin_right = 166.0
 margin_bottom = 71.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
@@ -131,7 +154,7 @@ Limit            "
 [node name="SpeedLimit" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 92.0
 margin_top = 8.0
-margin_right = 148.0
+margin_right = 166.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "50 kmph"
@@ -149,6 +172,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 65.0
 margin_right = 69.0
 margin_bottom = 228.0
@@ -188,7 +212,28 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
+[node name="SpeedLimitMarker" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Markers"]
+unique_name_in_owner = true
+visible = false
+margin_left = 34.0
+margin_top = 6.0
+margin_right = 93.0
+margin_bottom = 27.0
+text = "95 kmph"
+align = 1
+valign = 1
+
+[node name="SignalMarker" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Markers"]
+unique_name_in_owner = true
+visible = false
+material = SubResource( 13 )
+margin_left = -58.0
+margin_top = 8.0
+margin_right = -38.0
+margin_bottom = 28.0
+
 [node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 97.0
 margin_right = 101.0
 margin_bottom = 228.0

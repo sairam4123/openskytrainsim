@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/vm_ann_2.mp3-883e7312323b8718bff11ef8d27ff927.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/vm/vm_ann_2.mp3"
+dest_files=[ "res://.import/vm_ann_2.mp3-883e7312323b8718bff11ef8d27ff927.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

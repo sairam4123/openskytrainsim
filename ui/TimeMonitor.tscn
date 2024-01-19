@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/TimeMonitor.gd" type="Script" id=1]
+
+[node name="Control" type="Panel"]
+anchor_left = 0.0204978
+anchor_top = 0.798177
+anchor_right = 0.115666
+anchor_bottom = 0.846354
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 11.0
+margin_right = 112.0
+margin_bottom = 25.0
+text = "Time: 12:00:00"

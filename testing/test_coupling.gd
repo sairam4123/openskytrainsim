@@ -12,6 +12,10 @@ var consist: Spatial
 var coupling: Spatial
 var joints: Spatial
 
+func _ready():
+	set('consist_np', consist_np)
+	set('joints_np', joints_np)
+	set('coupling_np', coupling_np)
 
 func _get_tool_buttons():
 	return ['create_joints', 'delete_joints']

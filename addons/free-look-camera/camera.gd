@@ -39,13 +39,13 @@ func _input(event):
 	# Receives key input
 	if event is InputEventKey:
 		match event.scancode:
-			KEY_W:
+			KEY_R:
 				_w = event.pressed
-			KEY_S:
+			KEY_F:
 				_s = event.pressed
-			KEY_A:
+			KEY_Z:
 				_a = event.pressed
-			KEY_D:
+			KEY_X:
 				_d = event.pressed
 			KEY_Q:
 				_q = event.pressed

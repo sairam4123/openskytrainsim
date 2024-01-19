@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://sounds/train_announcements/tbm_ann.mp3" type="AudioStream" id=1]
+[ext_resource path="res://sounds/train_announcements/tbm/tbm_ann.wav" type="AudioStream" id=1]
 [ext_resource path="res://route_system/Route.tscn" type="PackedScene" id=2]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=3]
 [ext_resource path="res://speed_limit/SpeedLimit.tscn" type="PackedScene" id=4]
@@ -8,6 +8,7 @@
 [node name="MSB-TBM" instance=ExtResource( 2 )]
 route_name = "Chennai Suburban Route (Chennai Beach to Tambaram)"
 max_speed = 80
+station_layout_reversed = true
 
 [node name="BufferEnd" type="Spatial" parent="Stations" index="0" groups=["buffer"]]
 

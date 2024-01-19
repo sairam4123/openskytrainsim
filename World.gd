@@ -93,16 +93,13 @@ func _construct_position(station, pos, rot):
 
 
 func _generate_positions():
-	var route = get_tree().get_meta("route_name", null)
-	if route:
-		print("route selected")
-		var stations = load(route).instance()
-		$Route.add_child(stations)
+	if not $Route.get_children():
+		return
 	for child in $Route.get_child(0).get_stations():
 		positions[child.global_transform.origin] = {
 			"used": false,
 			"avail_pos": {
-				-3.125: {
+				-3.33: {
 					"avail": true,
 					"avail_rot": {
 						+1: true,
@@ -128,6 +125,12 @@ func _generate_positions():
 		}
 		name_position[child.name] = child.global_transform.origin
 		
+
+func load_route(route_name):
+	if route_name:
+		print("route selected")
+		var stations = load(route_name).instance()
+		$Route.add_child(stations)
 
 func is_vec_inf(vec):
 	return is_inf(vec.x) and is_inf(vec.y) and is_inf(vec.z)

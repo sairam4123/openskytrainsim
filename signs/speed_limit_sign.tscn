@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://signs/speed_limit_sign.gd" type="Script" id=2]
+[ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1.5, 1.5, 0, 1 )
+
+[sub_resource type="PrismMesh" id=18]
+size = Vector3( 2.25, 1.65, 0.125 )
+
+[sub_resource type="DynamicFont" id=17]
+resource_local_to_scene = true
+size = 84
+outline_size = 1
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="Shader" id=21]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec4 color1: hint_color;
+uniform vec4 color2: hint_color;
+uniform float strip_count = 10;
+uniform float direction = 1;
+uniform float width_shift = 0.5;
+
+
+void fragment() {
+	float pos = mix(UV.x, UV.y, direction) * strip_count;
+	float value = floor(fract(pos) + width_shift);
+	ALBEDO = mix(color1, color2, value).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 21 )
+shader_param/color1 = Color( 0.25, 0.25, 0.25, 1 )
+shader_param/color2 = null
+shader_param/strip_count = 4.0
+shader_param/direction = 1.0
+shader_param/width_shift = 0.5
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.031
+bottom_radius = 0.031
+height = 2.75
+
+[node name="SpeedLimitSign" type="Spatial" groups=["station_board"]]
+script = ExtResource( 2 )
+text = "50"
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.499999, 0, 0, 0, 0.499999, 0, 0, 0, 0.5, 0, 1.97267, 0 )
+material_override = SubResource( 4 )
+mesh = SubResource( 18 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3D" type="Label3D" parent="MeshInstance"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0.0054791, -0.23649, 0.0654406 )
+modulate = Color( 0, 0, 0, 1 )
+text = "50"
+font = SubResource( 17 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D2" type="Label3D" parent="MeshInstance"]
+transform = Transform( -0.999999, 0, -1.50996e-07, 0, 0.999999, 0, 1.50996e-07, 0, -1, 0.0054791, -0.23649, -0.0645594 )
+modulate = Color( 0, 0, 0, 1 )
+text = "50"
+font = SubResource( 17 )
+autowrap = true
+width = 200.0
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00882232, 0.508676, -0.00142121 )
+material_override = SubResource( 20 )
+mesh = SubResource( 3 )

@@ -43,6 +43,7 @@ config/icon="res://icon.png"
 SoundPlayer="*res://audio/SoundPlayer.gd"
 Players="*res://Players.gd"
 RouteServer="*res://route_system/RouteServer.gd"
+TimeManager="*res://time_system/TimeManager.gd"
 
 [debug]
 

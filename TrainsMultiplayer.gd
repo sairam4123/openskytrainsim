@@ -23,7 +23,12 @@ remotesync func create_player(id: int):
 	player.nick_name = get_tree().get_meta("player_name")
 	player.name = str(id)
 	player.set_network_master(id)
-	add_child(player)
+	if not get_tree().is_network_server():
+		rpc_id(1, "get_route_to_load")
+	else:
+		var route = get_tree().get_meta("route_name", null)
+		get_parent().load_route(route)
+		add_child(player)
 	prints(id, "joined the world.")
 	return player
 
@@ -52,3 +57,15 @@ func server_disconnected():
 
 func get_position_to_spawn(station = null, preferred_direction = 0):
 	return get_parent().get_position_to_spawn(station, preferred_direction)
+
+remote func get_route_to_load():
+	var route_name = get_tree().get_meta('route_name')
+	print("loading route: %s" % route_name)
+	rpc_id(get_tree().get_rpc_sender_id(), "route_to_load", route_name)
+
+remote func route_to_load(route_name):
+	print("Got route: %s" % route_name)
+	get_parent().load_route(route_name)
+	var player = Players.players[get_tree().get_network_unique_id()]
+	add_child(player)
+	

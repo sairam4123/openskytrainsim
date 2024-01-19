@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/old_tbm_ann.mp3-fe05ea4aab066762a47094c58ee6d431.mp3str"
+
+[deps]
+
+source_file="res://sounds/train_announcements/tbm/old_tbm_ann.mp3"
+dest_files=[ "res://.import/old_tbm_ann.mp3-fe05ea4aab066762a47094c58ee6d431.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

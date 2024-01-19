@@ -6,7 +6,7 @@ signal state_changed
 const signal_material = preload("res://materials/SignalMaterial.tres")
 
 enum SignalState {
-	ATTENTION, CAUTION, PROCEED, STOP
+	ATTENTION = 0, CAUTION = 1, PROCEED = 2, STOP = 3
 }
 
 
@@ -71,7 +71,7 @@ func update():
 				self.signal_state = SignalState.PROCEED
 			next_signal.SignalState.PROCEED:
 				self.signal_state = SignalState.PROCEED
-	
 
-func _ready():
-	set("signal_state", signal_state)
+
+#func _ready():
+#	set("signal_state", signal_state)

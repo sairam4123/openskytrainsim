@@ -1,0 +1,226 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://signs/sl_whitsle_sign.gd" type="Script" id=2]
+[ext_resource path="res://fonts/NotoSansDevanagari-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 1.5, 1.5, 0, 1 )
+
+[sub_resource type="CubeMesh" id=28]
+size = Vector3( 2, 2, 0.125 )
+
+[sub_resource type="DynamicFont" id=27]
+resource_local_to_scene = true
+size = 150
+outline_size = 1
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="CubeMesh" id=29]
+size = Vector3( 2, 2, 0.125 )
+
+[sub_resource type="DynamicFont" id=22]
+resource_local_to_scene = true
+size = 90
+outline_size = 1
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=25]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="QuadMesh" id=26]
+size = Vector2( 0.08, 2.828 )
+
+[sub_resource type="Shader" id=19]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec4 color1: hint_color;
+uniform vec4 color2: hint_color;
+uniform float strip_count = 10;
+uniform float direction = 1;
+uniform float width_shift = 0.5;
+
+
+void fragment() {
+	float pos = mix(UV.x, UV.y, direction) * strip_count;
+	float value = floor(fract(pos) + width_shift);
+	ALBEDO = mix(color1, color2, value).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 19 )
+shader_param/color1 = Color( 0.25, 0.25, 0.25, 1 )
+shader_param/color2 = null
+shader_param/strip_count = 4.0
+shader_param/direction = 1.0
+shader_param/width_shift = 0.5
+
+[sub_resource type="CylinderMesh" id=24]
+top_radius = 0.031
+bottom_radius = 0.031
+height = 3.5
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+whitlsle_type = 1
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.499999, 0, 0, 0, 0.499999, 0, 0, 0, 0.5, 0, 2.25, 0 )
+visible = false
+material_override = SubResource( 20 )
+mesh = SubResource( 28 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3D" type="Label3D" parent="MeshInstance"]
+transform = Transform( 0.999998, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.077466, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "W"
+font = SubResource( 27 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D2" type="Label3D" parent="MeshInstance"]
+transform = Transform( -0.999998, 0, -1.50996e-07, 0, 0.999999, 0, 1.50995e-07, 0, -0.999999, 0, -0.077466, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "W"
+font = SubResource( 27 )
+autowrap = true
+width = 200.0
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.499999, 0, 0, 0, 0.499999, 0, 0, 0, 0.5, 0, 3.39362, 0 )
+visible = false
+material_override = SubResource( 20 )
+mesh = SubResource( 28 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3D" type="Label3D" parent="MeshInstance2"]
+transform = Transform( 0.999998, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.2538, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "सी"
+font = SubResource( 27 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D2" type="Label3D" parent="MeshInstance2"]
+transform = Transform( -0.999998, 0, -1.50996e-07, 0, 0.999999, 0, 1.50995e-07, 0, -0.999999, 0, -0.16276, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "सी"
+font = SubResource( 27 )
+autowrap = true
+width = 200.0
+
+[node name="MeshInstanceSplit" type="MeshInstance" parent="."]
+transform = Transform( 0.499999, 0, 0, 0, 0.499999, 0, 0, 0, 0.5, 0, 2.25309, 0 )
+material_override = SubResource( 20 )
+mesh = SubResource( 29 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3D2" type="Label3D" parent="MeshInstanceSplit"]
+transform = Transform( 0.999992, 0, 0, 0, 0.999999, 0, 0, 0, 0.999994, -0.45, 0.45, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "W"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D3" type="Label3D" parent="MeshInstanceSplit"]
+transform = Transform( 0.999994, 0, 0, 0, 0.999999, 0, 0, 0, 0.999995, 0.45, -0.45, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "L"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D4" type="Label3D" parent="MeshInstanceSplit"]
+transform = Transform( -0.999992, 0, -8.74222e-08, 0, 0.999999, 0, 8.74221e-08, 0, -0.999993, 0.45, 0.45, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "W"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D5" type="Label3D" parent="MeshInstanceSplit"]
+transform = Transform( -0.999994, 0, -8.74224e-08, 0, 0.999999, 0, 8.74223e-08, 0, -0.999996, -0.45, -0.45, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "L"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label" type="MeshInstance" parent="MeshInstanceSplit"]
+transform = Transform( 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 0, 0, 0.999999, 0, 0, 0.065 )
+material_override = SubResource( 25 )
+mesh = SubResource( 26 )
+
+[node name="Label2" type="MeshInstance" parent="MeshInstanceSplit"]
+transform = Transform( 0.707106, 0.707106, -8.74227e-08, 0.707106, -0.707106, 0, -6.18172e-08, -6.18172e-08, -0.999999, 0, 0, -0.065 )
+material_override = SubResource( 25 )
+mesh = SubResource( 26 )
+
+[node name="MeshInstanceSplit2" type="MeshInstance" parent="."]
+transform = Transform( 0.499999, 0, 0, 0, 0.499999, 0, 0, 0, 0.5, 0, 3.36156, 0 )
+material_override = SubResource( 20 )
+mesh = SubResource( 29 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3D2" type="Label3D" parent="MeshInstanceSplit2"]
+transform = Transform( 0.999992, 0, 0, 0, 0.999999, 0, 0, 0, 0.999994, -0.45, 0.319661, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "सी"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D3" type="Label3D" parent="MeshInstanceSplit2"]
+transform = Transform( 0.999994, 0, 0, 0, 0.999999, 0, 0, 0, 0.999995, 0.45, -0.516579, 0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "फा"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D4" type="Label3D" parent="MeshInstanceSplit2"]
+transform = Transform( -0.999992, 0, -8.74222e-08, 0, 0.999999, 0, 8.74221e-08, 0, -0.999993, 0.466657, 0.30127, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "सी"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label3D5" type="Label3D" parent="MeshInstanceSplit2"]
+transform = Transform( -0.999994, 0, -8.74224e-08, 0, 0.999999, 0, 8.74223e-08, 0, -0.999996, -0.431627, -0.628879, -0.065 )
+modulate = Color( 0, 0, 0, 1 )
+text = "फा"
+font = SubResource( 22 )
+autowrap = true
+width = 200.0
+
+[node name="Label" type="MeshInstance" parent="MeshInstanceSplit2"]
+transform = Transform( 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 0, 0, 0.999999, 0, 0, 0.065 )
+material_override = SubResource( 25 )
+mesh = SubResource( 26 )
+
+[node name="Label2" type="MeshInstance" parent="MeshInstanceSplit2"]
+transform = Transform( 0.707106, 0.707106, -8.74227e-08, 0.707106, -0.707106, 0, -6.18172e-08, -6.18172e-08, -0.999999, 0, 0, -0.065 )
+material_override = SubResource( 25 )
+mesh = SubResource( 26 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76482, 0 )
+material_override = SubResource( 23 )
+mesh = SubResource( 24 )
