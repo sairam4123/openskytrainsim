@@ -17,7 +17,18 @@ func _input(event):
 			move_to_parent(0)
 		if event.scancode == KEY_3 and event.pressed:
 			move_to_parent(parent_of_current_parent.get_child_count()-1)
+	
+	if event is InputEventMouseMotion:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			rotate_y(-event.relative.x * 0.001)
+			$CameraROT.rotate_x(-event.relative.y * 0.001)
 		
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 func _process(delta):
 	if (Input.is_key_pressed(KEY_2) or Input.is_key_pressed(KEY_3)) and current:

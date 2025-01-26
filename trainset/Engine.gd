@@ -23,6 +23,7 @@ var time_between_horns = 2*60
 var headlight = 0 # SYNC
 var debug = false
 var idle_pitch = current_pitch # SYNC
+var traction_lock_active = false
 
 var previous_position = Vector3.INF
 export(float, 100, 15000) var engine_torque_hp = 100
@@ -64,15 +65,21 @@ func _physics_process(delta):
 #	if (speed >= 1 and speed < 40) and throttle < 1 and engine_brake <= 0:
 #		brake = -lerp(1, 50, clamp(speed, 1, 40)/40)
 #	else:
+	if engine_brake > 0 or train_brake > 0:
+		traction_lock_active = true
+	elif engine_brake < 1 and train_brake < 1 and throttle < 1:
+		traction_lock_active = false
+	
 	brake = engine_brake
 	
 	if engine_brake >= 100 and tnc_applied:
 		brake = engine_brake
 	
-	if engine_power_state:
-		engine_force = clamp(-throttle + engine_brake, -100, 0) * engine_torque_hp * reverser * delta
+	if engine_power_state and !traction_lock_active:
+		engine_force = (clamp(-throttle + engine_brake, -100, 0)/100) * engine_torque_hp * 0.746 * 0.8 * reverser
 	else:
 		engine_force = 0
+	
 	
 	if is_equal_approx(idle_pitch, 0.01):
 		if $IdleSoundPlayer.is_playing():
@@ -134,7 +141,8 @@ func _rpc_data():
 		"throttle": throttle,
 		"horn_pressed": horn_pressed,
 		"bell_pressed": bell_pressed,
-		"horn_pressed_time": horn_pressed_time
+		"horn_pressed_time": horn_pressed_time,
+		"traction_lock_active": traction_lock_active,
 		})
 
 func _state_machine_rpc(trigger):

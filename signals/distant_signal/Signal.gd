@@ -58,19 +58,23 @@ func set_next_signal(val):
 	next_signal_np = val
 	next_signal = get_node_or_null(val)
 	
-	update()
-	
-func update():
-	if next_signal:
-		match next_signal.signal_state:
-			next_signal.SignalState.CAUTION:
-				self.signal_state = SignalState.ATTENTION
-			next_signal.SignalState.STOP:
-				self.signal_state = SignalState.CAUTION
-			SignalState.ATTENTION:
-				self.signal_state = SignalState.PROCEED
-			next_signal.SignalState.PROCEED:
-				self.signal_state = SignalState.PROCEED
+#	update()
+#
+#func _process(delta):
+#	update()
+#
+#func update():
+#	print("updating..", signal_state, next_signal)
+#	if next_signal:
+#		match next_signal.signal_state:
+#			next_signal.SignalState.CAUTION:
+#				self.signal_state = SignalState.ATTENTION
+#			next_signal.SignalState.STOP:
+#				self.signal_state = SignalState.CAUTION
+#			SignalState.ATTENTION:
+#				self.signal_state = SignalState.PROCEED
+#			next_signal.SignalState.PROCEED:
+#				self.signal_state = SignalState.PROCEED
 
 
 #func _ready():

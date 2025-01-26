@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://textures/coast_sand_rocks_02_arm_1k.jpg" type="Texture" id=1]
 [ext_resource path="res://TrainsMultiplayer.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://ui/RouteMonitor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/TrainOperations.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
-[ext_resource path="res://addons/free-look-camera/camera.gd" type="Script" id=7]
 [ext_resource path="res://PointsCamera.gd" type="Script" id=8]
 [ext_resource path="res://ui/TimeMonitor.tscn" type="PackedScene" id=9]
 [ext_resource path="res://textures/coast_sand_rocks_02_ao_1k.jpg" type="Texture" id=11]
@@ -167,4 +166,3 @@ script = ExtResource( 8 )
 [node name="PointDefault" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="PointDefault"]
-script = ExtResource( 7 )

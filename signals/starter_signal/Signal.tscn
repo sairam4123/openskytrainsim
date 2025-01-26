@@ -13,12 +13,11 @@ signal_state = 0
 
 [node name="Pole" type="CSGBox" parent="."]
 width = 0.125
-height = 1.5
 depth = 0.125
 material = SubResource( 1 )
 
 [node name="SignalBox" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
 [node name="SignalBox" type="CSGBox" parent="SignalBox"]
 width = 0.5

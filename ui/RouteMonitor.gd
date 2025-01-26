@@ -43,6 +43,8 @@ func ready():
 	
 
 func _process(delta):
+	if not is_instance_valid(train):
+		return
 	var engine_z = train.position.z
 	$"%Engine".rect_position.y = lerp(0, 200, 0.5)
 	if is_instance_valid(train.get_engine_node()) and abs(train.get_engine_node().reverser):

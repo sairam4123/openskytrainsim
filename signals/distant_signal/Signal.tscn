@@ -1,16 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://materials/StopLightMaterial.tres" type="Material" id=1]
 [ext_resource path="res://signals/distant_signal/Signal.gd" type="Script" id=2]
 [ext_resource path="res://materials/SignalMaterial.tres" type="Material" id=3]
-[ext_resource path="res://materials/CautionLightMaterial.tres" type="Material" id=4]
-[ext_resource path="res://materials/AttentionLightMaterial.tres" type="Material" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="Signal" type="CSGCombiner"]
 script = ExtResource( 2 )
-signal_state = 0
 
 [node name="Pole" type="CSGBox" parent="."]
 width = 0.125
@@ -31,10 +29,11 @@ operation = 2
 radius = 0.125
 radial_segments = 8
 rings = 8
-material = ExtResource( 5 )
+material = ExtResource( 3 )
 
 [node name="OmniLight" type="OmniLight" parent="SignalBox/AttentionLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0, 0 )
+visible = false
 light_color = Color( 1, 1, 0, 1 )
 light_energy = 16.0
 light_specular = 0.0
@@ -62,10 +61,11 @@ operation = 2
 radius = 0.125
 radial_segments = 8
 rings = 8
-material = ExtResource( 4 )
+material = ExtResource( 3 )
 
 [node name="OmniLight" type="OmniLight" parent="SignalBox/CautionLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0, 0 )
+visible = false
 light_color = Color( 1, 1, 0, 1 )
 light_energy = 16.0
 light_specular = 0.0
@@ -77,10 +77,9 @@ operation = 2
 radius = 0.125
 radial_segments = 8
 rings = 8
-material = ExtResource( 3 )
+material = ExtResource( 1 )
 
 [node name="OmniLight" type="OmniLight" parent="SignalBox/StopLight"]
-visible = false
 light_color = Color( 1, 0, 0, 1 )
 light_energy = 16.0
 light_specular = 0.0

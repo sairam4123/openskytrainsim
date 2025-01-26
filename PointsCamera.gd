@@ -28,8 +28,10 @@ func create_new_camera():
 
 func set_current_camera(new_index):
 	var camera_child = get_child(new_index)
+	if not camera_child:
+		return
 	camera_child.current = true
-	index = camera_child.get_index()	
+	index = camera_child.get_index()
 
 func move_current_camera_relative(rel_index):
 	set_current_camera((index+rel_index) % get_child_count())

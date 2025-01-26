@@ -45,13 +45,11 @@ func set_next_signal(val):
 
 func update():
 	if next_signal:
-		pass
-	
-#		match next_signal.signal_state:
-#			next_signal.SignalState.STOP:
-#				self.signal_state = SignalState.STOP
-#			next_signal.SignalState.PROCEED:
-#				self.signal_state = SignalState.PROCEED
+		match next_signal.signal_state:
+			next_signal.SignalState.STOP:
+				self.signal_state = SignalState.STOP
+			next_signal.SignalState.PROCEED:
+				self.signal_state = SignalState.PROCEED
 
 #func _ready():
 #	set("signal_state", signal_state)

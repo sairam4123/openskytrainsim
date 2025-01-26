@@ -23,9 +23,9 @@ func _input(event):
 			horn_pressed = false
 			horn_pressed_time = OS.get_unix_time()
 		
-		if event.scancode == KEY_B and event.pressed and not event.echo:
+		if event.scancode == KEY_N and event.pressed and not event.echo:
 			bell_pressed = true
-		elif event.scancode == KEY_B and !event.pressed:
+		elif event.scancode == KEY_N and !event.pressed:
 			bell_pressed = false
 		
 		if event.scancode == KEY_W and event.pressed:
@@ -51,14 +51,14 @@ func _physics_process(delta):
 		_handle_input(delta)
 
 func _handle_input(delta):
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_A):
 		if Input.is_key_pressed(KEY_CONTROL):
 			new_throttle = 110
 			starting_throttle = throttle
 		else:
 			throttle += delta * 5
 			new_throttle = throttle
-	elif Input.is_key_pressed(KEY_A):
+	elif Input.is_key_pressed(KEY_D):
 		if Input.is_key_pressed(KEY_CONTROL):
 			new_throttle = -10
 			starting_throttle = throttle
@@ -146,6 +146,7 @@ func _process(delta):
 		$Label.text += "Engine Force: %d N\n" % abs(engine_force)
 		$Label.text += "Power: %s\n" % str(engine_power_state)
 		$Label.text += "Power Mode: %s\n" % str($StateMachinePlayer.current)
+		$Label.text += "Traction lock active: %s\n" % str(traction_lock_active)
 		$Label.text += "Current Position: %s\n" % str(global_transform.origin)
 		$Label.text += "TNC: %s\n" % str(tnc_applied)
 		$Label.text += "Horn Pressed: %s\n" % str(horn_pressed)

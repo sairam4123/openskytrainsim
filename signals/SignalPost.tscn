@@ -16,7 +16,6 @@ signal_state = 3
 
 [node name="Signal" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101339, 1, -0.0185497 )
-signal_state = 3
 
 [node name="Signal2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

@@ -46,16 +46,17 @@ func set_next_signal(val):
 	next_signal_np = val
 	next_signal = get_node_or_null(val)
 	
-	update()
+#	update()
+##
+##func _process(delta):
+#	update()
 
-func _process(delta):
-	update()
-
-func update():
-	pass
+#func update():
+##	print("updating...", signal_state, next_signal)
 #	if next_signal:
 #		match next_signal.signal_state:
 #			next_signal.SignalState.STOP:
 #				self.signal_state = SignalState.CAUTION
+#				print("Caution needs to be shown.")
 #			next_signal.SignalState.PROCEED:
 #				self.signal_state = SignalState.PROCEED

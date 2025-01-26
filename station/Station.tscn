@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://station/Station.gd" type="Script" id=1]
 [ext_resource path="res://shaders/line.gdshader" type="Shader" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://speed_limit/SpeedLimit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://station/StationPillar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://signals/SignalPost.tscn" type="PackedScene" id=8]
+[ext_resource path="res://station/PlatformMarker.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=9]
 flags_transparent = true
@@ -852,6 +853,9 @@ mesh = SubResource( 22 )
 [node name="MeshInstance2" parent="Sheets/Sheet1/StationBoard14" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 4.44089e-16, 0, 1, 0, 0.5, 0 )
 
+[node name="Indicator" parent="Sheets/Sheet1" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0.068, -0.2 )
+
 [node name="Sheet2" parent="Sheets" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 3, -30 )
 
@@ -962,6 +966,9 @@ mesh = SubResource( 32 )
 [node name="MeshInstance2" parent="Sheets/Sheet2/StationBoard14" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 4.44089e-16, 0, 1, 0, 0.5, 0 )
 
+[node name="Indicator" parent="Sheets/Sheet2" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0.0680001, -0.60076 )
+
 [node name="Sheet3" parent="Sheets" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 3, 30 )
 
@@ -1071,6 +1078,9 @@ mesh = SubResource( 42 )
 
 [node name="MeshInstance2" parent="Sheets/Sheet3/StationBoard14" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 4.44089e-16, 0, 1, 0, 0.5, 0 )
+
+[node name="Indicator" parent="Sheets/Sheet3" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0.0680001, 0.535523 )
 
 [node name="SpeedLimit" type="Spatial" parent="."]
 

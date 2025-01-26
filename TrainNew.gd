@@ -22,7 +22,7 @@ var train_brake = 0.0 setget set_train_brake
 var consist: Array setget, get_consist
 
 var _consist_with_joints = []
-
+var _is_coupling = false
 var joints = {}
 
 var in_station = false
@@ -63,7 +63,7 @@ func _ready():
 		$ConsistDefault.remove_child(engine_node)
 		$ConsistDefault.remove_child(coach_node)
 		engine_node = new_engine
-		coach_new.global_transform.origin.z = engine_node.global_transform.origin.z - 8 * (2 * int(rotation_degrees.y < 0) - 1)
+		coach_new.global_transform.origin.z = engine_node.global_transform.origin.z - 8.5 * (2 * int(rotation_degrees.y < 0) - 1)
 		new_engine.train = self
 		_consist_with_joints.append_array([new_engine, null, coach_new])
 		var previous_coach = coach_new
@@ -144,15 +144,23 @@ func get_consist(with_joints = false):
 		return consist_node.get_children()
 
 func join(coach1, coach2):
+#	if joints.get([coach1, coach2]) != null or joints.get([coach2, coach1]) != null:
+#		print("WHAT THE HECK?")
+#		return
 	var new_coupling = coupling_node.duplicate()
 	joints_node.add_child(new_coupling, true)
 	new_coupling.set("node_a", coach1.get_path())
 	new_coupling.set("node_b", coach2.get_path())
 	joints[[coach1, coach2]] = new_coupling
 
-func couple(train2):
+func couple(coupling_train):
 	print("COUPLING!")
-	var coach1 = get_consist()[-1]
+	var train1 = coupling_train if coupling_train.playable else self
+	var train2 = coupling_train if !coupling_train.playable else self
+	if _is_coupling:
+		return
+	_is_coupling = true
+	var coach1 = train1.get_consist()[-1]
 	var coach2 = train2.get_consist()[0]
 	
 	var new_coupling = coupling_node.duplicate()
@@ -160,22 +168,24 @@ func couple(train2):
 	new_coupling.set("node_a", coach1.get_path())
 	new_coupling.set("node_b", coach2.get_path())
 	joints[[coach1, coach2]] = new_coupling
+	print(new_coupling, train1, train2)
 	var consist = train2.consist
 	for idx in range(0, consist.size()):
 		var coach = consist[idx]
-		coach.train = self
+		coach.train = train1
 		train2.consist_node.remove_child(consist[idx])
-		self.consist_node.add_child(consist[idx], true)
+		train1.consist_node.add_child(consist[idx], true)
 		if idx+1 >= consist.size():
 			continue
 		var new_coach = consist[idx+1]
 #		print(joints)
 		var joint = train2.joints[[new_coach, coach]]
 		train2.joints.erase([coach, new_coach])
-		self.joints[[new_coach, coach]] = joint
+		train1.joints[[new_coach, coach]] = joint
 		train2.joints_node.remove_child(joint)
-		self.add_child(joint)
-	train2.queue_free()
+		train1.joints_node.add_child(joint)
+#	train2.queue_free()
+	_is_coupling = false
 	
 
 const Locomotive = preload("res://trainset/PlayerEngine.gd")
@@ -216,6 +226,6 @@ func uncouple(coupling):
 		joints.erase([coach, new_coach])
 		new_train.joints[[new_coach, coach]] = joint
 		joints_node.remove_child(joint)
-		new_train.add_child(joint)
+		new_train.joints_node.add_child(joint)
 		
 	

@@ -25,13 +25,11 @@ playable = true
 visible = false
 
 [node name="Engine" parent="ConsistDefault" instance=ExtResource( 1 )]
-mass = 12000.0
 engine_name = "WAP 7"
 engine_torque_hp = 5500.0
 
 [node name="Coach" parent="ConsistDefault" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25 )
-mass = 2000.0
 
 [node name="Coupling" parent="ConsistDefault" instance=ExtResource( 6 )]
 node_a = NodePath("../Engine")
