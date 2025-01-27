@@ -33,7 +33,7 @@ func _ready():
 	
 
 func _process(_delta):
-#	_handle_stop_time()
+	# _handle_stop_time()
 	if !Engine.editor_hint:
 		return
 	set_board_text(name)
@@ -46,6 +46,7 @@ func _handle_stop_time():
 				if timer.is_stopped() and not timer.has_meta("ok_to_depart"):
 					timer.start(time_on_station)
 					emit_signal("train_stopped")
+					
 				elif timer.has_meta("ok_to_depart") and not timer.is_stopped():
 					timer.stop()
 		elif !is_instance_valid(body):
@@ -145,9 +146,10 @@ func _on_Area_body_entered(body):
 		print("press horn")
 		timers[body] = Timer.new()
 		add_child(timers[body])
+		timers[body].wait_time = time_on_station
 		timers[body].one_shot = true
 		timers[body].connect("timeout", self, "_on_timer_timeout", [body])
-		print(timers)
+
 
 func _input(event):
 	if event is InputEventKey:
@@ -161,7 +163,9 @@ func _on_Area_body_exited(body):
 	if body.is_in_group("engine"):
 		print("Engine %s exited %s" % [body.engine_name, name] )
 		print("press horn twice")
-		timers.get(body, Node.new()).queue_free()
+		var timer = timers.get(body)
+		if timer:
+			timer.queue_free()
 
 func _on_timer_timeout(body: Spatial):
 	var audio = preload("res://sounds/depart_steam_whistle.wav")
@@ -198,3 +202,12 @@ func _on_timer_timeout(body: Spatial):
 #		return
 #	stop()
 #	hide()
+
+
+
+
+func _on_StopMarker_body_entered(body):
+	if body.is_in_group("engine"):
+		print("Engine %s is stopping" % body.engine_name)
+		timers[body].start()
+		

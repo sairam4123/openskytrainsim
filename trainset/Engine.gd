@@ -1,6 +1,5 @@
 extends VehicleBody
 
-
 export(String) var engine_name
 
 var throttle = 0 # SYNC
@@ -130,6 +129,9 @@ func _calc_speed(delta):
 	speed = abs((previous_position.z - global_transform.origin.z) / delta)
 	previous_position = global_transform.origin
 	previous_speed = speed
+	
+	if is_zero_approx(speed):
+		pass
 
 func _rpc_data():
 	rpc("sync_props", {

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://shaders/strips.gdshader" type="Shader" id=1]
+[ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.566, 1.018, 1.75 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1.5, 1.5, 0, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 1.5, 0.5, 0.055 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/color1 = Color( 2, 2, 0, 1 )
+shader_param/color2 = null
+shader_param/strip_count = 10.0
+shader_param/direction = 1.0
+shader_param/width_shift = 0.5
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.031
+bottom_radius = 0.031
+height = 1.5
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+outline_size = 1
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 2 )
+
+[node name="Area" type="Area"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50751, 0.68308, 0 )
+material_override = SubResource( 4 )
+mesh = SubResource( 5 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.19, 0 )
+material_override = SubResource( 6 )
+mesh = SubResource( 3 )
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.7, 0.035 )
+modulate = Color( 0, 0, 0, 1 )
+outline_modulate = Color( 0, 0, 0, 0.729412 )
+text = "STOP"
+font = SubResource( 7 )
+uppercase = true

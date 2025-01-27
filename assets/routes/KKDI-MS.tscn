@@ -2528,7 +2528,7 @@ max_speed = 110
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2000 )
 train_announcement = [ ExtResource( 1 ) ]
 announcement_volume = 6.021
-time_on_station = 30.0
+time_on_station = 120.0
 
 [node name="AudioStreamPlayer3D" parent="Stations/Chennai Egmore/AnnouncementPlayer/StationBoard" index="0"]
 stream = ExtResource( 1 )
@@ -2911,6 +2911,7 @@ mesh = SubResource( 31 )
 mesh = SubResource( 32 )
 
 [node name="Signal2" parent="Stations/Chennai Egmore" index="9"]
+transform = Transform( -3.23464e-08, 0, -0.74, 0, 0.85, 0, 0.74, 0, -3.23464e-08, 5.23055, 0, 62.345 )
 prev_signal_np = NodePath("../../../Signals/MS/Spatial9")
 
 [node name="Tambaram" parent="Stations" index="2" instance=ExtResource( 9 )]
@@ -3309,7 +3310,7 @@ signal_state = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1000 )
 train_announcement = [ ExtResource( 7 ), ExtResource( 15 ), ExtResource( 16 ) ]
 autoplay = true
-time_on_station = 40.0
+time_on_station = 60.0
 
 [node name="AudioStreamPlayer3D" parent="Stations/Villupuram Jn/AnnouncementPlayer/StationBoard" index="0"]
 stream = ExtResource( 7 )
@@ -3673,7 +3674,7 @@ mesh = SubResource( 96 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 train_announcement = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 14 ), ExtResource( 17 ) ]
 autoplay = true
-time_on_station = 40.0
+time_on_station = 60.0
 ann_index = 2
 
 [node name="AudioStreamPlayer3D" parent="Stations/Tiruchirapalli Jn/AnnouncementPlayer/StationBoard" index="0"]
@@ -4038,72 +4039,95 @@ mesh = SubResource( 128 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -770 )
 train_announcement = [ ExtResource( 3 ) ]
 autoplay = true
+time_on_station = 30.0
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard7" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard7" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard8" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard8" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard1" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard1" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard2" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard2" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard9" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard9" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard10" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard10" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard3" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard3" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard4" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard4" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard5" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard5" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard6" index="0"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Pudukkottai/AnnouncementPlayer/StationBoard6" index="1"]
 stream = ExtResource( 3 )
+autoplay = true
 
 [node name="EndBoard" parent="Stations/Pudukkottai/Boards" index="0"]
 text = "Pudukkottai"
@@ -4380,95 +4404,139 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1536 )
 train_announcement = [ ExtResource( 6 ) ]
 announcement_volume = 6.021
 autoplay = true
-time_on_station = 50.0
+time_on_station = 120.0
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard7" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard7" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard8" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard8" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard1" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard1" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard2" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard2" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard9" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard9" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard10" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard10" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard3" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard3" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard4" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard4" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard5" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard5" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard6" index="0"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="AudioStreamPlayer3D2" parent="Stations/Karaikudi Jn/AnnouncementPlayer/StationBoard6" index="1"]
 stream = ExtResource( 6 )
 unit_db = 6.021
+max_db = 6.021
+autoplay = true
 
 [node name="EndBoard" parent="Stations/Karaikudi Jn/Boards" index="0"]
 text = "Karaikudi Jn"
@@ -4762,10 +4830,10 @@ speed_limit = 30
 [node name="Spatial9" parent="Signals/MS" index="0" instance=ExtResource( 12 )]
 transform = Transform( -4.10887e-08, 0, -0.94, 0, 1.01, 0, 0.94, 0, -4.10887e-08, 5, 0, 1905 )
 prev_signal_np = NodePath("../Spatial4")
-next_signal_np = NodePath("../../../Stations/Tambaram/Signal")
+next_signal_np = NodePath("../../../Stations/Chennai Egmore/Signal2")
 direction = 1
 is_automatic = true
-signal_state = 2
+signal_state = 1
 
 [node name="Spatial4" parent="Signals/MS" index="1" instance=ExtResource( 12 )]
 transform = Transform( -4.10887e-08, 0, -0.94, 0, 1.01, 0, 0.94, 0, -4.10887e-08, 5, 0, 1805 )
@@ -4773,7 +4841,7 @@ prev_signal_np = NodePath("../Spatial8")
 next_signal_np = NodePath("../Spatial9")
 direction = 1
 is_automatic = true
-signal_state = 2
+signal_state = 0
 
 [node name="Spatial8" parent="Signals/MS" index="2" instance=ExtResource( 12 )]
 transform = Transform( -4.10887e-08, 0, -0.94, 0, 1.01, 0, 0.94, 0, -4.10887e-08, 5, 0, 1705 )

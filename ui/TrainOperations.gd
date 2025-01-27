@@ -52,3 +52,5 @@ func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_KP_5:
 			_regenerate_train_operations()
+		if event.scancode == KEY_7 and event.control and event.pressed:
+			_regenerate_train_operations()

@@ -1,7 +1,18 @@
 extends "res://trainset/Engine.gd"
 
+
+signal engine_stopped  # TODO: Replace with markers instead.
+
+
 var current setget set_current
 var in_station = false
+var engine_stopped_in_station = false setget set_engine_stopped
+
+func set_engine_stopped(value: bool):
+	if value and !engine_stopped_in_station:
+		emit_signal("engine_stopped")
+	engine_stopped_in_station = value
+	
 
 func _input(event):
 	if not is_network_master():
@@ -134,7 +145,9 @@ func _handle_input(delta):
 
 func _process(delta):
 	var current_time = OS.get_unix_time()
-	var engine_power_state = $StateMachinePlayer.get_current() in ["Idle", "Throttling"]	
+	var engine_power_state = $StateMachinePlayer.get_current() in ["Idle", "Throttling"]
+	if in_station:
+		engine_stopped_in_station = is_zero_approx(speed)
 	if debug and current:
 		$Label.text = "Throttle: %d%%\n" % throttle
 		$Label.text += "Brake: %s\n" % str(brake)
@@ -150,6 +163,7 @@ func _process(delta):
 		$Label.text += "Current Position: %s\n" % str(global_transform.origin)
 		$Label.text += "TNC: %s\n" % str(tnc_applied)
 		$Label.text += "Horn Pressed: %s\n" % str(horn_pressed)
+		$Label.text += "In Station: %s\n" % str(engine_stopped_in_station)
 		$Label.text += "TNC in %s seconds\nPress horn before TNC!" % str(abs(time_between_horns - (current_time - horn_pressed_time)))
 
 func set_current(value: bool):

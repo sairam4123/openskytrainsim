@@ -103,7 +103,7 @@ func set_train_brake(value: float):
 	for coach_idx in range(0, $Consist.get_child_count()):
 		var coach = $Consist.get_child(coach_idx)
 		if coach:
-			coach.brake = train_brake/($Consist.get_child_count()-1)
+			coach.brake = train_brake/($Consist.get_child_count())
 #		if coach.name.begins_with("engine"):
 #			coach. = train_brake/($Consist.get_child_count()-1)
 #func _physics_process(delta):
@@ -144,47 +144,78 @@ func get_consist(with_joints = false):
 		return consist_node.get_children()
 
 func join(coach1, coach2):
-#	if joints.get([coach1, coach2]) != null or joints.get([coach2, coach1]) != null:
-#		print("WHAT THE HECK?")
-#		return
+	if joints.get([coach1, coach2]) != null or joints.get([coach2, coach1]) != null:
+		push_error("Already joined. %s %s" % [coach1, coach2])
+		return
+	if coach1.train != coach2.train:
+		push_error("Trying to join two different trains, use `couple` instead.")
+		return
 	var new_coupling = coupling_node.duplicate()
 	joints_node.add_child(new_coupling, true)
 	new_coupling.set("node_a", coach1.get_path())
 	new_coupling.set("node_b", coach2.get_path())
 	joints[[coach1, coach2]] = new_coupling
+	joints[[coach2, coach1]] = new_coupling
 
 func couple(coupling_train):
 	print("COUPLING!")
-	var train1 = coupling_train if coupling_train.playable else self
-	var train2 = coupling_train if !coupling_train.playable else self
+	var train1
+	var train2
+	if coupling_train.playable or coupling_train.get_consist().size() > self.get_consist().size():
+		train1 = coupling_train
+		train2 = self
+	else:
+		train1 = self
+		train2 = coupling_train
+	
 	if _is_coupling:
 		return
+	
+	if train2.get_consist().size() <= 0:
+		push_error("Train2 contains 0 coaches!")
+		return
+	if train1.consist.size() <= 0:
+		push_error("Train1 contains 0 coaches!")
+		return
+	
 	_is_coupling = true
 	var coach1 = train1.get_consist()[-1]
 	var coach2 = train2.get_consist()[0]
 	
-	var new_coupling = coupling_node.duplicate()
-	joints_node.add_child(new_coupling, true)
-	new_coupling.set("node_a", coach1.get_path())
-	new_coupling.set("node_b", coach2.get_path())
-	joints[[coach1, coach2]] = new_coupling
-	print(new_coupling, train1, train2)
 	var consist = train2.consist
 	for idx in range(0, consist.size()):
 		var coach = consist[idx]
 		coach.train = train1
+		var coach_transform = coach.global_transform
 		train2.consist_node.remove_child(consist[idx])
 		train1.consist_node.add_child(consist[idx], true)
+		coach.global_transform = coach_transform
+		# Next coach is not available.
+		if idx+1 >= consist.size():
+			continue
+	for idx in range(0, consist.size()):
+		var coach = consist[idx]
 		if idx+1 >= consist.size():
 			continue
 		var new_coach = consist[idx+1]
-#		print(joints)
 		var joint = train2.joints[[new_coach, coach]]
 		train2.joints.erase([coach, new_coach])
+		train2.joints.erase([new_coach, coach])
 		train1.joints[[new_coach, coach]] = joint
+		train1.joints[[coach, new_coach]] = joint
+		joint.set("node_a", coach.get_path())
+		joint.set("node_b", new_coach.get_path())
 		train2.joints_node.remove_child(joint)
 		train1.joints_node.add_child(joint)
-#	train2.queue_free()
+	
+	# Create a new coupling
+	var new_coupling = coupling_node.duplicate()
+	new_coupling.set("node_a", coach1.get_path())
+	new_coupling.set("node_b", coach2.get_path())
+	train1.joints[[coach1, coach2]] = new_coupling
+	train1.joints[[coach2, coach1]] = new_coupling
+	train1.joints_node.add_child(new_coupling, true)
+	train2.call_deferred('queue_free')
 	_is_coupling = false
 	
 
@@ -204,28 +235,44 @@ func uncouple(coupling):
 	for couple in joints:
 		if joints[couple] == coupling:
 			coaches = couple
-	coupling.queue_free()
-	var coach = coaches[0]
+	
+	var coach = coaches[1] # Find B (not A) [Last coach]
 	var coach_idx = get_consist().find(coach)
-	print(coach_idx)
 	var consist = get_consist().duplicate()
 	var new_train = train_scene_packed.duplicate().instance()
 	new_train.playable = false
-	get_parent().add_child(new_train)
-	new_train.global_transform.origin = self.global_transform.origin
+	get_parent().add_child(new_train, true)
+	new_train.global_transform = self.global_transform
 	for idx in range(coach_idx, consist.size()):
 		coach = consist[idx]
 		coach.train = new_train
+#		new_train.consist.append(coach)
+#		self.consist.erase(coach)
+		var coach_transform: Transform = coach.global_transform
+		print(coach.global_transform)
 		consist_node.remove_child(consist[idx])
 		new_train.consist_node.add_child(consist[idx], true)
+		coach.global_transform = coach_transform.translated(coach_transform.basis.z * -2)
+		print(coach.global_transform, coach_transform)
+		if idx+1 >= consist.size():
+			continue
+	for idx in range(coach_idx, consist.size()):
+		coach = consist[idx]
 		if idx+1 >= consist.size():
 			continue
 		var new_coach = consist[idx+1]
-#		print(joints)
 		var joint = joints[[new_coach, coach]]
 		joints.erase([coach, new_coach])
+		joints.erase([new_coach, coach])
 		new_train.joints[[new_coach, coach]] = joint
+		new_train.joints[[coach, new_coach]] = joint
+		joint.set("node_a", coach.get_path())
+		joint.set("node_b", new_coach.get_path())
 		joints_node.remove_child(joint)
 		new_train.joints_node.add_child(joint)
+	
+	coupling.queue_free()
+	joints.erase([coaches[0], coaches[1]])
+	joints.erase([coaches[1], coaches[0]])
 		
 	

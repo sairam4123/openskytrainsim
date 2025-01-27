@@ -251,7 +251,7 @@ material = SubResource( 81 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, 3.5 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -264,7 +264,7 @@ material = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, 0 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance2" type="CSGCylinder" parent="VehicleWheel2"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -277,7 +277,7 @@ material = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.5, -3.5 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance3" type="CSGCylinder" parent="VehicleWheel3"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -290,7 +290,7 @@ material = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, 3.5 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel4"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -303,7 +303,7 @@ material = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, 0 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel5"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -316,7 +316,7 @@ material = SubResource( 32 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.5, -3.5 )
 suspension_travel = 0.25
 suspension_stiffness = 50.0
-suspension_max_force = 8000.0
+suspension_max_force = 24000.0
 
 [node name="MeshInstance" type="CSGCylinder" parent="VehicleWheel6"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
@@ -331,6 +331,7 @@ collision_layer = 32
 collision_mask = 48
 
 [node name="CollisionShape" type="CollisionShape" parent="Couplers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.113834 )
 shape = SubResource( 80 )
 
 [node name="Couplers2" type="Area" parent="."]
@@ -339,6 +340,7 @@ collision_layer = 32
 collision_mask = 48
 
 [node name="CollisionShape" type="CollisionShape" parent="Couplers2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.241422 )
 shape = SubResource( 80 )
 
 [node name="Sounds" parent="." instance=ExtResource( 1 )]

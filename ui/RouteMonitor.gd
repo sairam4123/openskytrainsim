@@ -200,3 +200,7 @@ func _input(event):
 		if event.scancode == KEY_KP_1 and event.pressed:
 			print("SETTING UP ROUTE MAP")
 			ready()
+		if event.scancode == KEY_6 and event.control and event.pressed:
+			print("Setting up route map Control+Key6")
+			ready()
+			

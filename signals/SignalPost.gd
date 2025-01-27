@@ -133,6 +133,7 @@ func _update():
 		return
 	
 	if _section_occupied:
+		print("Section is occupied. Cannot update.")
 		return
 	
 	match signal_type:

@@ -46,8 +46,9 @@ func _on_Couplers_area_entered(area):
 	if train != area.get_parent().train:
 		print(train, area.get_parent().train)
 		train.call_deferred('couple', area.get_parent().train)
+	else:
 #	prints(name, "front", area, $Couplers)
-	train.call_deferred('join', self, area.get_parent())
+		train.call_deferred('join', self, area.get_parent())
 #	print(train.joints)
 
 
@@ -57,7 +58,8 @@ func _on_Couplers2_area_entered(area):
 	if train != area.get_parent().train:
 		print(train, area.get_parent().train)
 		area.get_parent().train.call_deferred('couple', train)
+	else:
 #	prints(name, "back", area, $Couplers2)
-	train.join(self, area.get_parent())
+		train.call_deferred('join', self, area.get_parent())
 #	print(train.joints)
 	
